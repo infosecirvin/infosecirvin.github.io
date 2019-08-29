@@ -59,7 +59,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-third w3-center">
-      <!-- i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i -->
     </div>
 
     <div class="w3-center">
@@ -72,7 +71,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         float: left;
         width: 33.33%;
         padding: 10px;
-        height: 300px; /* Should be removed. Only for demonstration */
+        height: 300px; 
       }
       
       .row:after {
@@ -84,7 +83,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <div class="row">
           <div class="column">
           <h2>IT Infrastructure Updates and Refresh</h2>
-          <p><img src="refresh.png" style="max-width:100px;max-height:100px;"></p>
+          <p><img src="refresh.png" style="max-width:150px;max-height:150px;"></p>
           </div>
           <div class="column">
           <h2>Cybersecurity Solutions</h2>
@@ -103,101 +102,130 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
  <div class="w3-content">
-    <div class="w3-third w3-center">
-    </div>
+    <div class="w3-third w3-center"></div>
     <div class="w3-center">
       <h1>Current and Previous Work</h1>
-      <style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
+<!-- here -->
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
 
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.navbar a {
-  float: left;
-  font-size: 16px;
+a:link {
   color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-.dropdown {
+    }
+a:visited {
+  color: white;
+    }
+    
+/* Style the tab */
+.tab {
   float: left;
-  overflow: hidden;
+  border: none;
+  background-color: #f1f1f1;
+  width: 30%;
+  height: 300px;
 }
 
-.dropdown .dropbtn {
-  font-size: 16px;  
+/* Style the buttons inside the tab */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
   border: none;
   outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
   text-align: left;
+  cursor: pointer;
+  font-size: 17px;
 }
 
-.dropdown-content a:hover {
+/* Change background color of buttons on hover */
+.tab button:hover {
   background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: none;
+  color: white;
+  width: 70%;
+  border-left: none;
+  height: 300px;
+  display: none;
+}
+
+/* Clear floats after the tab */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 </style>
 </head>
 <body>
-
-<div class="navbar">
-  <div class="dropdown">
-    <button class="dropbtn">Conference & Presentations 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">January 3-4: WASTC ICT Educator's Conference 2018 - SkillsUSA and BayCyber.net</a>
-      <a href="https://2019.educatingforcareers.org/session/today%E2%80%99s-ict-tech-pathways-%E2%80%93-aws-cloud-computing-and-defense">March 3: Today’s ICT Tech Pathways – AWS Cloud Computing and Defense</a>
-      <a href="https://ictdmsector.org/past-webinars/">May 17: NETLAB+ User Group</a>
-      <a href="#">June 10-14: WASTC Faculty Development Week</a>
-      <a href="#">August 9-10: SkillsUSA CA Planning Meeting for Cybersecurity Competition</a>
-      <a href="#">September 11-15: Santa Cruz County Fair</a>
-      <a href="#">September 12: Cisco Partner Meeting "Getting Started with CyberPatriots"</a>
-      <a href="#">September 13: NETLAB+ User Group: Cyber Competitions</a>
-    </div>
-  </div> 
+<div class="tab">
+  <button class="tablinks" onmouseover="openCity(event, 'One')">Conferences & Presentations</button>
+  <button class="tablinks" onmouseover="openCity(event, 'Two')">TV and Radio Appearances</button>
+  <button class="tablinks" onmouseover="openCity(event, 'Three')">Articles</button>
 </div>
+
+<div id="One" class="tabcontent">
+ <p><a href="https://repl.it/" target="_blank">Repl.it</a><br>Repl.it gives you an instant IDE to learn, build, collaborate, and host all in one place.</br></p>
+ <p><a href="https://trinket.io/" target="_blank">Trinket</a><br>Trinket lets you run and write code in any browser, on any device. Trinkets work instantly, with no need to log in, download plugins, or install software. Easily share or embed the code with your changes when you're done.</br></p>
+</div>
+
+<div id="Two" class="tabcontent">
+  <p><a href="https://sploitus.com/" target="_blank">Sploitus</a><br>Exploit and Hacktool Search Engine</br><p>
+  <p><a href="https://app.sndbox.com/upload/" target="_blank">SNDBOX</a><br>Online Sample Analysis</br><p>
+</div>
+
+<div id="Three" class="tabcontent">
+  <p><a href="https://www.root-me.org/?lang=en" target="_blank">Root-Me</a><br>The fast, easy, and affordable way to train your hacking skills.</br><p>
+  <p><a href="https://www.hackthebox.eu/" target="_blank">Hack the Box</a><br>Hack The Box is an online platform allowing you to test your penetration testing skills and exchange ideas and methodologies with thousands of people in the security field.</br><p>
+  <p><a href="https://www.owasp.org/index.php/OWASP_Juice_Shop_Project" target="_blank">OWASP Juice Shop</a><br>The application contains a vast number of hacking challenges of varying difficulty where the user is supposed to exploit the underlying vulnerabilities.</br><p>
+  <p><a href="https://ctf.link/" target="_blank">hxp CTFs</a><br>The environment is practically identical to the original CTF but running on your own computer.
+</br><p>
+  <p><a href="https://codebreaker.ltsnet.net" target="_blank">NSA Code Breakers Challenge</a><br>The NSA Codebreaker Challenge provides students with a hands-on opportunity to develop their reverse-engineering / low-level code analysis skills while working on a realistic problem set centered around the NSA's mission.</br><p>
+  <p><a href="https://pivotproject.org/" target="_blank">Pivot Project</a><br>Pivot helps students develop the practical, hands-on skills that are essential to succeed in cybersecurity jobs and careers. Challenges build on the knowledge gained in classes and are offered in multiple domains and difficulty levels. And they’re all free.</br><p>
+    <p><a href="http://ctf.infosecinstitute.com/ctf2/" target="_blank">Practical Web Hacking</a><br>This app is focused on ethical hacking freshers and new web developers.</br><p>
+</div>
+
+<div class="clearfix"></div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 </body>
+
+<!-- end -->
     </div>
+  </div>
 </div>
 
 <!-- Footer -->
-<footer class="w3-center">  
+<footer class="w3-center w3-light-grey">  
  <p>© 2019 Irvin Lemus </p>
 </footer>
 
