@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"> 
+<!-- Website Header -->
+<title>OWASP Cornucopia 08/07/19</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div>
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>OWASP Cornucopia</b></h1>
+  <h2>August 7, 2019</h2>
+</header>
+
+<p>Since the CyberCamps ended last week, I have had time to begin preparing for the Fall semester at Cabrillo College. In that time, I have also been gathering new resources and realigning the <a href="https://baycyber.net/" target="_blank">baycyber.net</a> website for the academic year's vision and goals. In that time, I came across <a href="https://www.owasp.org/index.php/OWASP_Cornucopia#tab=Main" target="_blank">OWASP Cornucopia</a>, a card game that piqued my interest. After getting the college to pay for the printing of the cards, I learned how to play.</p>
+
+<img src="../pics/blog/owaspcornucopia/site.png" alt="OWASP Cornucopia Page" style="width: 70%">
+
+<p>Though the site looks overwhelming, the actual game is not difficult. <a href="https://www.youtube.com/watch?v=9dVDqeO6y3A" target="_blank">This video</a> helped me understand how to play the game. For those who don't have 40 minutes to listen, here is the breakdown of the game for you to play in your classroom, job, etc. </p>
+
+
+<h3>Things you need:</h3>
+<ul>
+  <li><a href="https://www.owasp.org/index.php/OWASP_Cornucopia#tab=Get_the_Cards" target="_blank">OWASP Cornucopia Cards (52)</a></li>
+  <li><a href="https://www.owasp.org/index.php/File:Cornucopia-scoresheet.pdf" target="_blank">Scoresheet</a></li>
+  <li>A data flow map of a Web Application you and your team has created, a fully detailed network topology, or detailed map of a server.</li>
+</ul>
+
+<img src="../pics/blog/owaspcornucopia/pic1.png" alt="Example map from the video" style="width: 70%">
+<p>The last bullet point is the most important; this game does work well if you don't have a device, system or infrastructure you're analyzing.</p>
+
+<h3>Rounds</h3>
+<p>Once you have all three, shuffle the cards and deal the entire deck to all players evenly. At this time, the group designates a starting person as well.</p>
+
+<p>Everyone looks at their cards to see which threat written in the card is possible on the network/device/application in play. The first person a card down on the table.</p>
+
+<img src="../pics/blog/owaspcornucopia/pic2.png" alt="Example card" style="width: 30%">
+
+<p>The person who put the card down must explain where, on what device or process, would this be a problem. In our case, could Pravin bypass authentication controls (such as username/password) to a separate resource (such as Samba, FTP, ssh) on the Mail server, SQL Database or Web Configuration?</p>
+
+<p>If this is accepted as plausible by the group, the next person puts down a card of the same suite which is higher than the 10 the first person's. If the second person does not have an Authentication suite card, they can put down a card from another suite. If no one has a higher card that can beat this, the winner gets a point.</p>
+
+<p>This process repeats until all cards are used.</p>
+
+<h3>Post Game</h3>
+<p>After the cards are spent, the scores are tallied and the threats are organized by their risk level. This final product can now be used to present findings, become tickets for the team to resolve, etc.</p>
+
+<h3>Few Pointers</h3>
+<p>I suggest using systems or applications the players are really familiar with or they built from scratch, as these will bring more fruitful conversations and debates which will lead to a more thorough threat modeling exercise.</p>
+
+<p>Another good tip is to read through the documentation they linked (which is also referenced on the cards). These reference files will help in understanding where the card scenarios come from and help players gain a better understanding to what kind of threat they're talking about. </p>
+
+<img src="../pics/blog/owaspcornucopia/pic3.png" alt="reference files" style="width: 30%">
+
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2019 Irvin Lemus</p>
+  <div style="position:relative;bottom:20px;" class="w3-tooltip w3-right">  
+    <a class="w3-text-white" href="#top"><span class="w3-small">
+  </div>
+</footer>

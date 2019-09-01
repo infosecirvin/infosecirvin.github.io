@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"> 
+<!-- Website Header -->
+<title>Hibernate 08/24/19</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div>
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Ubuntu 19 - Enable Hibernation</b></h1>
+  <h2>August 24, 2019</h2>
+</header>
+
+<p>After spending the summer playing with differnet OS's, I found that Debian had hibernation ready capability. Unfortunately, I ran into some other issues with it and my laptop and decided to go back to Ubuntu. Ubuntu 19.04's install process does not create a large enough swap partition to allow the system to hibernate, which Debian did.</p>
+
+<p>Hibernation is important for security reasons: with the OS in suspend/sleep, an attacker can get the data off your system since the hard drive is open to Memory. Forcing the system to hibernate when the lid is closed prevents an attacker from getting to your data when the lid is shut, should you ever lose your device.</p>
+
+<p>Follow these steps in order to enable hibernation on Ubuntu 19.04. Please note that these steps begin after you have installed Ubuntu 19.04 on your system and you encrypted the drive as part of the install process.</p>
+
+<h3>Step 1: Resizing the root partition</h3>
+<p>Once the installation is complete, do not reboot. Open the Disks application and a Terminal.<br>
+Unlock your encrypted drive by clicking on the lock and entering the password you made during the install process.</p>
+
+<img src="../pics/blog/swap/01.png" alt="Ubuntu Disks" style="width: 70%">
+
+<p>With it unlocked, you should see the now populated Block devices. Knowing where they are is important moving forward.</p>
+
+<p>In Terminal, run "<b>lvmdiskscan</b>" to verify the findings and the disk space currently allocated for the partitions.</p>
+
+<p>We now can begin the resize process. First, we will check the root partition for any errors by typing "<b>sudo e2fsck -f /dev/ubuntu-vg/root</b>" <i>Please remember to change the /dev/ to what you see on your device.</i></p>
+
+After this has completed with no issues, we can resize the partition with the following command: "<b>sudo lvreduce --resizefs -L __G /dev/ubuntu-vg/root</b>" Please note the "<b>__G</b>" should be the new size of the partition in gigabytes. Make enough room for more than what your total RAM size is. 
+
+<h3>Step 2: Increase Swap Space</h3>
+<p>With room to work with, we will increase swap by typing "<b>lvresize -L +15G /dev/ubuntu-vg/swap_1</b>" Please ensure your /dev/ location matches your computer.</p>
+
+You can now reboot the system and boot into Ubuntu for the first time.</p>
+
+<h3>Step 3: Enabling Hibernation</h3>
+<p>Once we're in the OS, we can make final changes to complete the process.</p>
+
+<p>If there is greater than or equal swap space to RAM, running "<b>sudo systemctl hibernate</b>" should cause the system to hibernate. If there isn't enough space, you will see an error about it (at which point, go back to Step 1 and 2 to increase more swap space).</p> 
+
+<p>With the test successful, we log back into the machine for the final change. Edit the Lid Actions by typing "<b>sudo nano /etc/systemd/logind.conf</b>"</p>
+
+<p>Once in the file, uncomment and edit the line "<i>HandleLidSwitch=hibernate</i>". Save the file and restart the computer one last time to finish the process!</p>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2019 Irvin Lemus</p>
+  <div style="position:relative;bottom:20px;" class="w3-tooltip w3-right">  
+    <a class="w3-text-white" href="#top"><span class="w3-small">
+  </div>
+</footer>
