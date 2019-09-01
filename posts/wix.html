@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"> 
+<!-- Website Header -->
+<title>Wix Departure 09/01/19</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div>
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Why I Left Wix</b></h1>
+  <h2>September 01, 2019</h2>
+</header>
+
+<p>Moving from one platform to another can be a tricky situation. Akin to movements from Windows 7 to 10, migrating a server or switching vendors, there's always a learning curve and the possibility of things going wrong. This switch involved leaving Wix, a website hosting service to using GitHub pages.</p> 
+
+<p>Fortunately, I've done migrations and switch overs enough to know there must be a backup plan in place to restore everything should the process fail. Here is why I left Wix and switched over to GitHub pages (where this is currently hosted):
+
+<h3>Origins: Too Many Social Media Accounts</h3>
+<img src="../pics/blog/wix/sm.jpg" alt="Social Media" style="width: 20%">
+<p>When I started going on my own, I needed a place to tell the world I was avaialble and looking for empolyment. My first choice was LinkedIn, which worked great at first. With the rise of other social media platforms, it meant having multiple accounts, multiple apps and more time spent on my phone just trying to stay up-to-date, sometimes seeing the same thing 3 or 4 times from different platforms. This became exhausting to me, so I minimized my social media presence to only Twitter. Not only did this cut down on the number of places to keep track of, I had the chance to make my own site and show what I wanted to potential customers and employers.</p>
+
+<p>To start, Wix was a natural choice since <a href="https://baycyber.net" target="_blank">baycyber.net</a> is there and I was familiar with it. Over time, my personal use of Wix became more and more annoying. 
+
+<h3>Too Slow</h3>
+<img src="../pics/blog/wix/slow.png" alt="Slow" style="width: 20%">
+<p>Reason #1 for leaving was it is too slow. My personal website (which doesn't have a lot of content) always took a while to load. During the migration, I realized why: the home webpage alone was over 6,000 lines!!! Theres a huge portion dedicated to grabbing every possible font known to man, along with two enormous sections dedicated to meta data that the user does not see.</p>
+
+<p>Why is it so big? All the tracking Wix has, all the extra code that runs on your browser; I was almost surpirsed I didn't see any bitcoin mining within the thousands of lines!</p>
+
+<p>Add to the frustration is the browser editing software they provide. It is cumbersome; although they tried to make life easier with their ADI, it still required a fast Internet connection and good computer to get into the site and make even the simplest changes. </p>
+
+<h3>Can't Edit Website's Code</h3><h4><i>but can embedd code</i></h4>
+<img src="../pics/blog/wix/cant.jpg" alt="Cant" style="width: 20%">
+<p>As I mentioned above, the Wix webpages are huge to download and operate, and this is by design. In their documentation, they state you cannot download your own website as it is "optimized" for their servers. In the editors, you are unable to get to the code behind your page, although you can add elements of HTML to their pages, almost like a pseudo website host. This can make life more difficut when trying to make modifications that you want, but are completly unable to do on their platform due to these restrictions.</p>
+
+<h3>Can't add Name Servers to DNS Entries</h3>
+<p>As I am utilizing more and more online services, I want to host them under the domain name I bought. Come to find out, I can't add Name Server records to Wix; th4y don't allow that. A, CNAME and even MX can be added, but not NS. So much for making VMs accessible from my domain!</p>
+
+<h3>On to <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></h3>
+<img src="../pics/blog/wix/ghp.png" alt="Github Pages" style="width: 20%">
+<p>Making the choice to mvoe to GitHub was easy; it doesn't cost anything. You can make your own repository with your username, and as long as you put up HTML files on that repository, you have a working website that has its own certificate and everything. If you want to use a custom domain, you'll need to purchase it from another provider, but that can be as cheap as $12 from <a href="domains.google" target="_blank"> domains.google</a>.</p>
+
+<p>My suggestion: this move isn't for everyone. You are managing multiple parts on your own (GitHub, Domains, HTML pages, etc). If you are unfamiliar with any one of those three items, I suggest reading up and practicing before making your move.</p>
+
+<img src="../pics/blog/wix/future.jpg" alt="Future" style="width: 20%">
+<p>This did make for a good one day project, working through HTML, reading their code, creating my own pages and copying my content, getting GitHub pages working and making this my new site home. It will be interesting to see what I can do and the limits of using GitHub pages ar.</p>
+
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2019 Irvin Lemus</p>
+  <div style="position:relative;bottom:20px;" class="w3-tooltip w3-right">  
+    <a class="w3-text-white" href="#top"><span class="w3-small">
+  </div>
+</footer>
