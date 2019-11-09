@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"> 
+<!-- Website Header -->
+<title>Pacific Hackers 2019 11/10/19</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div>
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Pacific Hackers Conference: What I Learned</b></h1>
+  <h2>November 10, 2019</h2>
+  <img src="../pics/blog/phack/phack.jpg" alt="Pacific Hackers Logo" style="width: 20%">
+</header>
+
+<p><a href="https://phack.org" target="_blank">Pacific Hackers</a> had their conference this weekend at the Hacker Dojo in Santa Clara. Here is a quick recap of things I learned that I found beneficial to share.</p> 
+
+<h3>Day 1: Saturday</h3>
+<h4>Skadi</h4>
+<img src="../pics/blog/phack/skadi_header.jpg" alt="Pacific Hackers Logo" style="width: 20%">
+<p><a href="https://skadivm.com" target="_blank">Skadi</a> is an interesting compilation of tools made by Alan Orlikoski to aid folks in Incident Response. While this is not a tool for Digital Forensics, as it does write to disk in the process, it does help build a system loaded with tools to aid an IR team member without the headache of setting up each tool individually.</p>
+
+<p>The short version is, by utilizing two scripts, you can be up and running in about 10 minutes. Alan has number of ways to get this running, from Docker, Vagrant to OVA <a href="https://github.com/orlikoski/Skadi" target="_blank">on his GitHub.</a> I chose to use the Docker version on <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> because I didn't want to download and run a VM locally with 4+ GB RAM, 8 Cores and 100+ GB free space. Instead, I went to Digital Ocean and created a VM from the marketplace with those specifications.</p>
+<img src="../pics/blog/phack/docker1.png" alt="Pacific Hackers Logo" style="width: 20%">
+<p><i><center>This has all you need to get started, docker and docker-compose!</center></i></p>
+
+<p>After the VM is made, update it and then download the first of two files you will need to get this built. I chose to use the more secure installer that create randomly generated usernames and passwords to prevent outsiders from using default credentials to get into the system.</p>
+<p><center>wget -O /tmp/buildskadi.sh https://raw.githubusercontent.com/orlikoski/skadi/master/scripts/signedbuildskadi.sh <br> sudo bash /tmp/signedbuildskadi.sh</center></p>
+
+<p>When the script ends, you will be presented with unique credentials that you will need to login and proceed from. Make sure you save them for your reference!</p>
+
+<p>In order to ensure confidentiality (remember that from the fundamentals of Security?) you should secure the site with a certificate from Let's Encrypt. To do this, first register the server with your domain (like <a href="https://domains.google" target="_blank">domains.google</a>) and then run the second script found in the /scripts folder called "secure_network.sh". Provide the FQDN for the box and in a couple of minutes, you are done! Now you can use this system and its open source tools to do all your IR needs.</p>
+
+
+<h4>BlackPhenix</h4>
+<p>This was an interesting demo. Chris Navarrete, the presenter and creator of the program, quickly demonstrated his creation to us. Slides and manuals are found <a href="https://github.com/fortinet/ips-bph-framework" target="_blank">on this GitHub.</a> This tool looks to be a local tools, not meant to run in the cloud yet to perform malware analysis and redirect traffic to let malware run and see what its up to, looking at files created, processes and network connectivity while rerouting everything to a control center like a botnet. It does implement Virtualbox (sorry VMware folks) but I can see how it can work on both. Take a look at the tool and implement it. This is one of those tools that may find their way into my courses.</p>
+
+<h4>Moloch</h4>
+<img src="../pics/blog/phack/moloch.png" alt="Moloch" style="width: 20%">
+<p><a href="https://molo.ch" target="_blank">Moloch</a> is a packet capture tool that grants packet visiblity with graphs, charts, maps and more. It looks like a possible replacement to Wireshark to aid in Incident Response. The Demo they have is interesting; definetly another tool that will see itself in class.</p>
+<h4>Day 2: Sunday</h4>
+
+
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2019 Irvin Lemus</p>
+  <div style="position:relative;bottom:20px;" class="w3-tooltip w3-right">  
+    <a class="w3-text-white" href="#top"><span class="w3-small">
+  </div>
+</footer>
