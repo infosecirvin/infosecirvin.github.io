@@ -41,8 +41,7 @@ img {display:block;margin-left: auto; margin-right: auto;}
 
 <p><a href="https://phack.org" target="_blank">Pacific Hackers</a> had their conference this weekend at the Hacker Dojo in Santa Clara. Here is a quick recap of things I learned that I found beneficial to share.</p> 
 
-<h3>Day 1: Saturday</h3>
-<h4>Skadi</h4>
+<h3>Skadi</h3>
 <img src="../pics/blog/phack/skadi_header.jpg" alt="Pacific Hackers Logo" style="width: 20%">
 <p><a href="https://skadivm.com" target="_blank">Skadi</a> is an interesting compilation of tools made by Alan Orlikoski to aid folks in Incident Response. While this is not a tool for Digital Forensics, as it does write to disk in the process, it does help build a system loaded with tools to aid an IR team member without the headache of setting up each tool individually.</p>
 
@@ -57,16 +56,18 @@ img {display:block;margin-left: auto; margin-right: auto;}
 
 <p>In order to ensure confidentiality (remember that from the fundamentals of Security?) you should secure the site with a certificate from Let's Encrypt. To do this, first register the server with your domain (like <a href="https://domains.google" target="_blank">domains.google</a>) and then run the second script found in the /scripts folder called "secure_network.sh". Provide the FQDN for the box and in a couple of minutes, you are done setting up your box! Now you can use the CyLR tool to create a zip file, upload it via ssh and get analyzing.</p>
 
-<p></p>
-
-<h4>BlackPhenix</h4>
+<h3>BlackPhenix</h3>
 <p>This was an interesting demo. Chris Navarrete, the presenter and creator of the program, quickly demonstrated his creation to us. Slides and manuals are found <a href="https://github.com/fortinet/ips-bph-framework" target="_blank">on this GitHub.</a> This tool looks to be a local tools, not meant to run in the cloud yet to perform malware analysis and redirect traffic to let malware run and see what its up to, looking at files created, processes and network connectivity while rerouting everything to a control center like a botnet. It does implement Virtualbox (sorry VMware folks) but I can see how it can work on both. Take a look at the tool and implement it. This is one of those tools that may find their way into my courses.</p>
 
-<h4>Moloch</h4>
+<h3>Moloch</h3>
 <img src="../pics/blog/phack/moloch.png" alt="Moloch" style="width: 20%">
-<p><a href="https://molo.ch" target="_blank">Moloch</a> is a packet capture tool that grants packet visiblity with graphs, charts, maps and more. It looks like a possible replacement to Wireshark to aid in Incident Response. The Demo they have is interesting; definetly another tool that will see itself in class.</p>
-<h4>Day 2: Sunday</h4>
+<p><a href="https://molo.ch" target="_blank">Moloch</a> is a packet capture tool that grants packet visiblity with graphs, charts, maps and more. It looks like a possible replacement to Wireshark to aid in Incident Response. The demo they have is interesting; definetly another tool that will see itself in class.</p>
 
+<h3>Open Source Tools</h3>
+<p>Marco Palacios mentioned two tools that have been on the back burner, <a href="https://suricata-ids.org/" target="_blank">Suricata</a> and <a href="https://thehive-project.org/" target="_blank">The Hive Project.</a> I think The Hive Project will find itself being utilized in one of the Bay Area Regional competitions <i>(hint hint)</i>.</p>
+
+<h4>Quote of the Day</h4>
+<p>"Hackers are free people, just like artists who wake up in the morning in a good mood and start painting," Vladimir Putin</p>
 
 </div>
 </div>
