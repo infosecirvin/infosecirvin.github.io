@@ -47,18 +47,58 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <p><i><center>This has all you need to get started, docker and docker-compose!</center></i></p>
 
 <p>With this image ready to go, we will proceed to changing the password and then updating the system.</p>
-<img src="../pics/blog/thehive/update.png" alt="Updating Linux" style="width: 20%">
+<img src="../pics/blog/thehive/update.png" alt="Updating Linux" style="width: 30%">
 
 <h3>Installing The Hive Project via Docker</h3>
 <p>Per <a href="https://github.com/TheHive-Project/TheHiveDocs/blob/master/installation/install-guide.md#docker" target="_blank">their directions here,</a> you should create a docker-compose.yml file with the information provided. This should do the heavy lifting for you and create the system, with The Hive accessible on your VM's address port 9000. </p>
-<img src="../pics/blog/thehive/docker-compose.png" alt="Docker Compose file" style="width: 20%">
+<img src="../pics/blog/thehive/docker-compose.png" alt="Docker Compose file" style="width: 30%">
 <p><i><center>Per their instructions, run docker-compose up to get the process started.</center></i></p>
-<img src="../pics/blog/thehive/elasticfail.png" alt="Elastic Fail" style="width: 20%">
+<img src="../pics/blog/thehive/elasticfail.png" alt="Elastic Fail" style="width: 30%">
 <p>Verify all three instances are up and running by running <i>docker container ls</i>. If you see three VMs, you should be good to go. I ran into an issue where elasticsearch was not running because it didn't have enough memory. What fixed this was the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html" target="_blank">solution from here.</a></p> 
 
-<p>With the three VMs up, the site should be ready to be accessed. Go to your IP address and add port 9000 to access the system <i>(i.e. 192.168.1.1:9000)</i>. </p>
+<p>After the command calms down and all three VMs are up, the site should be ready to be accessed. Go to your IP address and add port 9000 to access the system <i>(i.e. 192.168.1.1:9000)</i>. Upon going to the hive's site, it should ask you to update the database (the button will do the trick) and then proceed to make your administrator account. You should also do the same on the Cortex site (Cortex can be accessed by the same IP address, but at port 9001.) </p>
+<img src="../pics/blog/thehive/adminlogin.png" alt="Admin Login" style="width: 20%">
 
+<h3>Configuring the Hive Project</h3>
+<h4>Cortex Configuration</h4>
 
+<p>Staying within Cortex, login with your newly created administrator and create an organization (cortex is the default and won't be used in The Hive). <a href="https://github.com/TheHive-Project/CortexDocs/blob/master/admin/admin-guide.md" target="_blank">Information has been gathered from here</a> for your reference.</p>
+<p><i><center>Click this button</center></i></p>
+<img src="../pics/blog/thehive/addorg.png" alt="Step 1" style="width: 20%">
+<p><i><center>Add required information</center></i></p>
+<img src="../pics/blog/thehive/addorg1.png" alt="Step 2" style="width: 20%">
+<p><i><center>Done!</center></i></p>
+<img src="../pics/blog/thehive/addorg2.png" alt="Step 3" style="width: 20%">
+
+<p>Create users for the organization (I made two, one to be the orgadmin and a regular user. Don't forget to create passwords for them to login). The regular user with read and analyze permissions will be useful later.</p>
+<img src="../pics/blog/thehive/addusers.png" alt="Adding Users" style="width: 30%">
+
+<p>Log back in as the orgadmin for this new organization you have made. This will give you a different look with things we need to configure. Go to the Organization > Analyzers Config section.</p>
+<img src="../pics/blog/thehive/neworglogin.png" alt="New organization" style="width: 50%">
+
+<p>In order to get these working, you will need to provide information. Taking Virustotal as an example, you first need to have an <a href="https://www.virustotal.com/gui/sign-in" target="_blank">account with VirusTotal</a> to insert the API key in the analyzer.</p>
+<img src="../pics/blog/thehive/virustotal.png" alt="virustotal" style="width: 20%">
+<p><i><center>VirusTotal Website to create an account</center></i></p>
+<img src="../pics/blog/thehive/vtanalyzer.png" alt="Analyzer" style="width: 20%">
+<p><i><center>Enter your new API here</center></i></p>
+<img src="../pics/blog/thehive/vtanalyzer1.png" alt="Analyzer" style="width: 30%">
+<p><i><center>Checks verify your configuration is saved</center></i></p>
+
+<p>After that, go to the Analyzers section and scroll to VirusTotal. Hit Enable and then save the settings (verify that the API key is there).</p>
+<img src="../pics/blog/thehive/vtanalyzer2.png" alt="Analyzer" style="width: 30%">
+
+<h4>The Hive Configuration</h4>
+<p>Before working in The Hive, we need to make a quick change. Reconnect to your Digital Ocean VM via SSH if you closed that connection earlier. <p>Per the instructions <a href="https://github.com/TheHive-Project/TheHiveDocs/blob/master/admin/configuration.md#6-cortex" target="_blank">from this link</a>, create a file called "application.conf" and add your second user's information made in Cortex and server information to the file. Next, copy the file from your VM into the container like so:</p>
+<img src="../pics/blog/thehive/docker1.png" alt="Copy into Docker" style="width: 50%">
+
+<p>In the Hive, create an administrator and login. As with Cortex, you will need to create a new account that isn't administrator and login as that user in order to use it. Though this seems tedious, it is a good security measure made by the creators of The Hive Project.</p>
+
+<p>Once logged in as your new admin, import the zip file <a href="https://github.com/TheHive-Project/TheHiveDocs/blob/master/admin/admin-guide.md#3-report-template-management" target="_blank">from this document</a> into your instance (see the file for location). </p>
+
+<h3>Verifying Everything Works</h3>
+Create a new case and add an observable file (you can use malware1 from CIS 75 Module 2; the password to decrypt is infected. You will also have to decode the file "malware1" from base64 to a windows executable). </p>
+
+<p>Logging in with your new account gives you access to the system! Feel free to use my Security+'s malware introduction to see this tool at work. </p>
 
 </div>
 </div>
