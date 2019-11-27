@@ -42,11 +42,11 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <p><a href="https://phack.org" target="_blank">Pacific Hackers</a> had their conference this weekend at the Hacker Dojo in Santa Clara. Here is a quick recap of things I learned that I found beneficial to share.</p> 
 
 <h3>Skadi</h3>
-<img src="../pics/blog/phack/skadi_header.jpg" alt="Pacific Hackers Logo" style="width: 20%">
+<img src="../pics/blog/phack/skadi_header.jpg" alt="Skadi Logo" style="width: 20%">
 <p><a href="https://skadivm.com" target="_blank">Skadi</a> is an interesting compilation of tools made by Alan Orlikoski to aid folks in Incident Response. While this is not a tool for Digital Forensics, as it does write to disk in the process, it does help build a system loaded with tools to aid an IR team member without the headache of setting up each tool individually.</p>
 
 <p>The short version is, by utilizing two scripts, you can be up and running in about 10 minutes. Alan has number of ways to get this running, from Docker, Vagrant to OVA <a href="https://github.com/orlikoski/Skadi" target="_blank">on his GitHub.</a> I chose to use the Docker version on <a href="https://digitalocean.com" target="_blank">Digital Ocean</a> because I didn't want to download and run a VM locally with 4+ GB RAM, 8 Cores and 100+ GB free space. Instead, I went to Digital Ocean and created a VM from the marketplace with those specifications.</p>
-<img src="../pics/blog/phack/docker1.png" alt="Pacific Hackers Logo" style="width: 20%">
+<img src="../pics/blog/phack/docker1.png" alt="Choosing Docker Image" style="width: 20%">
 <p><i><center>This has all you need to get started, docker and docker-compose!</center></i></p>
 
 <p>After the VM is made, update it and then download the first of two files you will need to get this built. I chose to use the more secure installer that create randomly generated usernames and passwords to prevent outsiders from using default credentials to get into the system.</p>
@@ -60,7 +60,7 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <p>This was an interesting demo. Chris Navarrete, the presenter and creator of the program, quickly demonstrated his creation to us. Slides and manuals are found <a href="https://github.com/fortinet/ips-bph-framework" target="_blank">on this GitHub.</a> This tool looks to be a local tools, not meant to run in the cloud yet to perform malware analysis and redirect traffic to let malware run and see what its up to, looking at files created, processes and network connectivity while rerouting everything to a control center like a botnet. It does implement Virtualbox (sorry VMware folks) but I can see how it can work on both. Take a look at the tool and implement it. This is one of those tools that may find their way into my courses.</p>
 
 <h3>Moloch</h3>
-<img src="../pics/blog/phack/moloch.png" alt="Moloch" style="width: 20%">
+<img src="../pics/blog/phack/moloch.png" alt="Moloch logo" style="width: 20%">
 <p><a href="https://molo.ch" target="_blank">Moloch</a> is a packet capture tool that grants packet visiblity with graphs, charts, maps and more. It looks like a possible replacement to Wireshark to aid in Incident Response. The demo they have is interesting; definetly another tool that will see itself in class.</p>
 
 <h3>Open Source Tools</h3>
@@ -76,7 +76,4 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <!-- Footer -->
 <footer class="w3-container">
   <p>© 2019 Irvin Lemus</p>
-  <div style="position:relative;bottom:20px;" class="w3-tooltip w3-right">  
-    <a class="w3-text-white" href="#top"><span class="w3-small">
-  </div>
 </footer>
