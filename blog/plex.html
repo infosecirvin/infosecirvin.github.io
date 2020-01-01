@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"> 
+<!-- Website Header -->
+<title>Plex Media Server December 2019 12/31/19</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div>
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>Plex Server Install</b></h1>
+  <h2>December 31, 2019</h2>
+  <img src="../pics/blog/plex/plex.jpeg" alt="Plex logo" style="width: 20%">
+</header>
+
+<p>With the rise of multiple streaming services with varied content, there seems to be a push back to having your own personal collection of movies and shows. A person could go down the road of buying a small form factor motherboard, CPU, Hard Drives and install Linux, deal with local network issues to get the content available outside the house; not including upkeep on the physical as well as the software. <a href="https://www.plex.tv/" target="_blank">Plex</a> has a online server you can install and use to stream your own personal content online, ad free. A notice: <b>THIS GUIDE DOES NOT CONDONE ILLEGAL USE!</b> Please remember the legality and ethics of piracy, do what you will with this information, but I am not responsible.</p> 
+
+<h3>Step 1: Installation</h3>
+<p>Using a Digital Ocean Ubuntu 18.04 image with 2 GB of RAM and 2 CPUs ($15/month), you can install the Plex Media Server on this system from <a href="https://www.plex.tv/media-server-downloads/" target="_blank">this link.</a> Please select Linux in the "Plex Media Server" left hand side and "Ubuntu (16.04+) / Debian (8+) - Intel/AMD 64-bit" option.
+<img src="../pics/blog/plex/01.png" alt="Choosing the Install" style="width: 50%">
+<p>In order to skip a step of downloading and uploading to the Digital Ocean VM, right click the proper option and choose "Copy Link Address." Once logged into your DO VM, type "wget" add a space and paste the link from the Plex website and hit enter. This will download the file to the DO VM directly.</p>
+<img src="../pics/blog/plex/02.png" alt="Downloading and Installing" style="width: 50%">
+<p><center>The two commands are <br>wget (paste the link from the website)<br><br>dpkg -i plex(push TAB to autocomplete)<br></center></p>
+
+<p>Two more steps will be required to finalize installation. Per <a href="https://itsfoss.com/install-plex-ubuntu/" target="_blank">this article,</a> you will need to run the following two commands to ensure updates will occur for the Plex software (because we are all about security here!) <br><center>echo deb https://downloads.plex.tv/repo/deb public main | sudo tee /etc/apt/sources.list.d/plexmediaserver.list<br>curl https://downloads.plex.tv/plex-keys/PlexSign.key | sudo apt-key add -<br></center><br></p>
+
+<h3>Step 2: Configuration</h3>
+<p>With the Plex program installed, we need to configure it. Per <a href="https://support.plex.tv/articles/200288666-opening-plex-web-app/" target="_blank">this page</a>, we will create an SSH tunnel to configure our server. On the terminal, go type: <br><center>ssh ip.address.of.server -L 8888:localhost:32400</center><br> Though the result of the command looks like a typical SSH connection, we have done more than that; we've created a tunnel to get local access to port 8888, what we need to configure this device.</p>
+
+<p>On a browser, naviate to <i>localhost:8888/web</i> and you should see your Plex server. If you haven't made a Plex account yet, you can at this step and then proceed. You will need it to stream from your phone and other places.</p>
+<img src="../pics/blog/plex/03.png" alt="Configuring Plex" style="width: 50%">
+<p>We MUST have "Allow me to access my media outside my home" as this device isn't in our homes!</p>
+<img src="../pics/blog/plex/03.png" alt="Configuring Plex" style="width: 50%">
+<p>At this time, you can start uploading content to the VM and then have it scan for it and add it to your library. The easiest way is by the command scp. As seen here:<br><center>scp -r ~/Downloads/123/ root@ipaddress:/absolutepath/</center><br>We will take a whole folder from our system (in my case, located in my Downloads folder) and recursively send everything to the server at a specific location. Once the upload completes, you can add those folders in Plex and you are good to go!</p>
+
+<h3>Plex Account</h3>
+<p>With data uploaded on the Plex Server, you can now go to your cell phone or other device, download the Plex App, login and begin streaming ad free to your heart's content. </p>
+
+<h3>A Few Notes</h3>
+<p>If you wish to secure your server with HTTPS, you can use <a href="https://gist.github.com/srilankanchurro/fa3fdeb5cf10ebb251aa88338b8b37db" target="_blank">this guide</a> to accomplish this. You will need a domain name before proceeding; if you don't have one, you can buy one at <a href="domains.google" target="_blank">domains.google</a>.</p>
+<p>I do want to note that the only purchase I made was on my Android device in order to stream from it to my other devices ($4.99). I did not pay for Plex Pass or anything else Plex related.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2019 Irvin Lemus</p>
+</footer>
