@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"/>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="shortcut icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="apple-touch-icon" href="../pics/scicon.jpg" type="image/jpeg"/>
+ <link rel="stylesheet" href="w3.css">
+ <link rel="stylesheet" href="w3-theme-black.css">
+ <link rel="stylesheet" href="font-awesome.min.css">
+<!-- Website Header -->
+<title>Summer Camp 2020 07/31/2020</title>
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
+<meta property="og:image" content="../pics/scicon.jpg"/>
+<meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
+<style>
+body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
+.topnav {overflow: hidden;background-color: #333;}
+.topnav a {float: left;color: #f2f2f2;text-align: center;padding: 14px 16px;text-decoration: none;font-size: 17px;}
+.topnav a:hover {background-color: #ddd;color: black;}
+.topnav a.active {background-color:#66a3ff;color: white;}
+img {display:block;margin-left: auto; margin-right: auto;}
+.container {padding: 15px;}
+h1 {text-align: center;}
+h2 {text-align: center;}
+</style>
+
+<div class="topnav" id="top">
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../blog.html">Blog</a>
+  <a href="../media.html">Media</a>
+  <a href="../class.html">Free Courses</a>
+  <a href="https://www.github.com/infosecirvin" target="_blank">GitHub</a>
+  <a href="https://www.twitter.com/@infosecirvin"target="_blank" >Twitter</a>
+</div>
+</head>
+<!-- -->
+<div class="container">
+<div class="w3-padding">
+<header class="w3-container w3-center w3-padding-32">
+  <h1><b>Summer Camp 2020</b></h1>
+  <h2>July 31, 2020</h2>
+  <img src="../pics/blog/su20/gamble.jpg" alt="Gamble" style="width: 20%">
+</header>
+
+<p>The gamble that paid off; what seemed impossible for a group of teachers and community college students to do was achieved this summer. Now that it is in the last weeks, I can talk about the camps we successfully executed.</p>
+
+<h3>The Idea</h3>
+<p>When the pandemic struck and we began retreating indoors in late February, I had to begin looking at the summer and make judgment calls with the limited amount of information with two teams. At the time, we were losing events such as SkillsUSA and redesigning other events on the fly, like our Regional Competition. Together, we made a decision to go ahead and make our camps completly virtual amid all uncertainty. </p>
+<p>We made two major decisions that paid off: choosing specific subjects that can are unique and be covered in 3 hours with corresponding events in two hours; utilize multiple technologies for redundancy, efficiency and control while providing Cabrillo Admin Team and the campers the opportunity to use a wide range of technology. Thus the subjects of Digital Footprint, Python, Linux and Networking were chosen for Intro Camp; Cryptography, Digital Forensics, Web Application Exploitation and Malware Analysis for Advanced Camp. Some have Capture the Flags associated, others have activities on other sites or hosted by the Cabrillo Admin Team. </p>
+<p>With everyone working from home, we worked to create a camp experience from the ground up that ended up replicated by the North Far North and Sacramento Regions.</p>
+
+<h3>Technology</h3>
+<p>Knowing we are working with many unknowns, we had to establish equity on our end. Two requirements were given to the students: they needed a computer with an up to date browser (Chrome/Firefox) and an Internet connection (DSL and up). Everything else fell on us.</p>
+
+<ul>
+    <li><a href="https://www.instructure.com/canvas/" target="_blank">Canvas</a>: This serves as the universal location for the content. Used by all the Community Colleges of California, we ported all prior content and content within this framework.</li>
+    <li><a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a>: This would allow us to provide students with a VM preloaded with all the tools necessary to be participate in the camps without installing anything on their local systems. Usage was paid by utilizing <a href="https://edu.google.com/programs/credits/teaching/?modal_active=none">GCP credits</a>.</li>
+    <li><a href="https://guacamole.apache.org/" target="_blank">Apache Guacamole</a>: When loaded in GCP, this would be the interface for the students to interact with their VMs over the browser, with no local installation.</li>
+    <li><a href="https://www.digitalocean.com/" target="_blank">Digital Ocean</a>: <i>(My personal favorite cloud provider)</i> This hosted our Capture the Flags and Kubernetes instances. </li>
+    <li><a href="https://ctfd.io/" target="_blank">CTFd</a>: An easy to deploy CTF platform (especially with our <a href="https://github.com/infosecirvin/cybercompetitions/tree/master/vmsetup" target="_blank">script</a> &#128578;)</li>
+    <li><a href="https://zoom.us/" target="_blank">Zoom</a>: Easy to deploy live streaming of the lectures to students.</li>
+    <li><a href="https://discord.com" target="_blank">Discord</a>: Communication platform allowing the entire community to collaborate, talk and meet.</li>
+</ul>
+<p>All of this together created a multicloud infrastructure with many moving parts that created a wonderful experience for our campers. Discord provided the community element for all our campers stuck at home, Canvas provided the curriculum, Zoom the instruction, GCP the stable platform and Digital Ocean the afternoon activities. If it sounds like a lot, you are right; 4 teachers and 8 techs served 200 students/week utilizing all these technologies at once successfully.</p>
+
+<h3>Avoiding Mistakes from 2019 and Potential Pitfalls</h3>
+<p>This execution was not without controversy. For once, I chose against using the community college private cloud, Netlab, after last year's fiasco. We overloaded the private cloud to a painful point that was deterimental to our camps. By using this 2020 method, we put each camp in their own GCP region to prevent any one region from getting overloaded, using different projects and zones to minimize the potential of slowdown. Using a separate cloud for the content and competitions also allowed us to be flexible should anything go down unexpectedly. We built in redundancy to ensure everything worked no matter what. This paid off the week of July 17 when Cloudflare had an outage that affected Discord and Digital Ocean's CDN network. Our CTFs stayed alive and our students used Zoom to continue working through the outage.</p>
+
+<h3>Congrats and Thanks</h3>
+<p>Congratulations and Thank You to the people who made this possible:</p>
+<p>Bay Area (content creators)</p>
+  <ul>
+    <li>Admin Team: Richard Grotegut, Denise Moss, Brianne Kodakari</li>
+    <li>Teaching Team: Andrea Salas, Miguel Baez, Beverly Brooks, Eric Skagerberg</li>
+    <li>Tech Team: Darien Cruz, Ryan Garcia, Jonathan Muniz, George Nunez, Brandon Pimentel, Janelly Servin, Juan Soberanes, Jeremy Woodling</li>
+  </ul>
+<p>North Far North</p>
+  <ul>
+    <li>Admin Team: Wendy Porter, Ashley Slovak, Jared Amalog</li>
+    <li>Teaching Team: Malinda Durken, David Pai, Ed Miro</li>
+    <li>Tech Team: Mongsterjay, Griffin, Zack</li>
+  </ul>
+<p>Sacramento</p>
+  <ul>
+    <li>Admin Team: Markus Geissler, Jared Amalog, Ashley Slovak</li>
+    <li>Teaching Team: Kevin Anderson, Buddy Spisak</li>
+    <li>Tech Team: Tuesday Parker, Tim Mccandles, Abelizaz Kaina</li>
+</ul>
+<p>Summer Camp 2021 will have three camps (beginning, intermediate, advanced) with more content for students to do, new things to learn and a continued expansion of the infrastructure we built this year. COVID did not bring us down!</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w3-container">
+  <p>© 2013-2020 Irvin Lemus</p>
+</footer>

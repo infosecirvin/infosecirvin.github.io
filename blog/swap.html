@@ -10,7 +10,7 @@
  <link rel="stylesheet" href="font-awesome.min.css">
 <!-- Website Header -->
 <title>Hibernate 08/24/19</title>
-<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
 <meta property="og:image" content="../pics/scicon.jpg"/>
 <meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
 <style>
@@ -21,6 +21,8 @@ body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
 .topnav a.active {background-color:#66a3ff;color: white;}
 img {display:block;margin-left: auto; margin-right: auto;}
 .container {padding: 15px;}
+h1 {text-align: center;}
+h2 {text-align: center;}
 </style>
 
 <div class="topnav" id="top">
@@ -36,7 +38,7 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <!-- -->
 <div class="container">
 <div class="w3-padding">
-<header class="w3-container w3-center w3-padding-32"> 
+<header class="w3-container w3-center w3-padding-32">
   <h1><b>Ubuntu 19 - Enable Hibernation</b></h1>
   <h2>August 24, 2019</h2>
 </header>
@@ -59,7 +61,7 @@ Unlock your encrypted drive by clicking on the lock and entering the password yo
 
 <p>We now can begin the resize process. First, we will check the root partition for any errors by typing "<b>sudo e2fsck -f /dev/ubuntu-vg/root</b>" <i>Please remember to change the /dev/ to what you see on your device.</i></p>
 
-After this has completed with no issues, we can resize the partition with the following command: "<b>sudo lvreduce --resizefs -L __G /dev/ubuntu-vg/root</b>" Please note the "<b>__G</b>" should be the new size of the partition in gigabytes. Make enough room for more than what your total RAM size is. 
+After this has completed with no issues, we can resize the partition with the following command: "<b>sudo lvreduce --resizefs -L __G /dev/ubuntu-vg/root</b>" Please note the "<b>__G</b>" should be the new size of the partition in gigabytes. Make enough room for more than what your total RAM size is.
 
 <h3>Step 2: Increase Swap Space</h3>
 <p>With room to work with, we will increase swap by typing "<b>lvresize -L +15G /dev/ubuntu-vg/swap_1</b>" Please ensure your /dev/ location matches your computer.</p>
@@ -69,7 +71,7 @@ You can now reboot the system and boot into Ubuntu for the first time.</p>
 <h3>Step 3: Enabling Hibernation</h3>
 <p>Once we're in the OS, we can make final changes to complete the process.</p>
 
-<p>If there is greater than or equal swap space to RAM, running "<b>sudo systemctl hibernate</b>" should cause the system to hibernate. If there isn't enough space, you will see an error about it (at which point, go back to Step 1 and 2 to increase more swap space).</p> 
+<p>If there is greater than or equal swap space to RAM, running "<b>sudo systemctl hibernate</b>" should cause the system to hibernate. If there isn't enough space, you will see an error about it (at which point, go back to Step 1 and 2 to increase more swap space).</p>
 
 <p>With the test successful, we log back into the machine for the final change. Edit the Lid Actions by typing "<b>sudo nano /etc/systemd/logind.conf</b>"</p>
 

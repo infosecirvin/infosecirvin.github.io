@@ -10,7 +10,7 @@
  <link rel="stylesheet" href="font-awesome.min.css">
 <!-- Website Header -->
 <title>Installing The Hive Project 11/??/19</title>
-<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>        
+<meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
 <meta property="og:image" content="../pics/scicon.jpg"/>
 <meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
 <style>
@@ -21,6 +21,8 @@ body {margin: 0;font-family: Arial, Helvetica, sans-serif;}
 .topnav a.active {background-color:#66a3ff;color: white;}
 img {display:block;margin-left: auto; margin-right: auto;}
 .container {padding: 15px;}
+h1 {text-align: center;}
+h2 {text-align: center;}
 </style>
 
 <div class="topnav" id="top">
@@ -36,13 +38,13 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <!-- -->
 <div class="container">
 <div class="w3-padding">
-<header class="w3-container w3-center w3-padding-32"> 
+<header class="w3-container w3-center w3-padding-32">
   <h1><b>Installing The Hive Project</b></h1>
   <h2>November ??, 2019</h2>
   <img src="../pics/blog/thehive/hivelogo.png" alt="The Hive Project" style="width: 20%">
 </header>
 
-<p><a href="https://thehive-project.org/" target="_blank">The Hive Project</a> is a open source SOC tool, one of many I saw at Pacific Hackers 2019 and one that I found interesting for the spring <a href="https://baycyber.net/competitions" target="_blank">Bay Area Regionals Competition.</a> While at the time of this writing I cannot give any specifics to the game, I see no problem saying what tools students will be using in order to get them to do research ahead of time. So this will focus on getting an instance of The Hive Project installed and ready to go.</p> 
+<p><a href="https://thehive-project.org/" target="_blank">The Hive Project</a> is a open source SOC tool, one of many I saw at Pacific Hackers 2019 and one that I found interesting for the spring <a href="https://baycyber.net/competitions" target="_blank">Bay Area Regionals Competition.</a> While at the time of this writing I cannot give any specifics to the game, I see no problem saying what tools students will be using in order to get them to do research ahead of time. So this will focus on getting an instance of The Hive Project installed and ready to go.</p>
 
 <h3>Setting up the VM</h3>
 <p>First step is to get a VM with Docker and Docker Compose. If you have read my earlier posts, I recommend Digital Ocean for this, as they have a VM image ready to go with everything required. Create an image with more than 8 GB of RAM.</p>
@@ -57,7 +59,7 @@ img {display:block;margin-left: auto; margin-right: auto;}
 <img src="../pics/blog/thehive/docker-compose.png" alt="Docker Compose file" style="width: 30%">
 <p><i><center>Per their instructions, run docker-compose up to get the process started.</center></i></p>
 <img src="../pics/blog/thehive/elasticfail.png" alt="Elastic Fail" style="width: 30%">
-<p>Verify all three instances are up and running by running <i>docker container ls</i>. If you see three VMs, you should be good to go. I ran into an issue where elasticsearch was not running because it didn't have enough memory. What fixed this was the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html" target="_blank">solution from here.</a></p> 
+<p>Verify all three instances are up and running by running <i>docker container ls</i>. If you see three VMs, you should be good to go. I ran into an issue where elasticsearch was not running because it didn't have enough memory. What fixed this was the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html" target="_blank">solution from here.</a></p>
 
 <p>After the command calms down and all three VMs are up, the site should be ready to be accessed. Go to your IP address and add port 9000 to access the system <i>(i.e. 192.168.1.1:9000)</i>. Upon going to the hive's site, it should ask you to update the database (the button will do the trick) and then proceed to make your administrator account. You should also do the same on the Cortex site (Cortex can be accessed by the same IP address, but at port 9001.) </p>
 <img src="../pics/blog/thehive/adminlogin.png" alt="Admin Login" style="width: 20%">
