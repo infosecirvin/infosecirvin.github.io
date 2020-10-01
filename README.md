@@ -1,5 +1,5 @@
-# infosecirvin.github.io
-Goals
+# Info Service Readme
+
 An easy way to create a simple, secure website with a blog
 Support for text-based and photo-based blog formats
 Easy authoring in HTML, Markdown (with code formatting), or JSON
