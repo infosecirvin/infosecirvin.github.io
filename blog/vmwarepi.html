@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="w3-theme-black.css">
  <link rel="stylesheet" href="font-awesome.min.css">
 <!-- Website Header -->
-<title>The Physical and Digital Worlds are One 08/16/2020</title>
+<title>Running VMware ESXi on the RPi 10/31/2020</title>
 <meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
 <meta property="og:image" content="../pics/scicon.jpg"/>
 <meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
@@ -41,34 +41,22 @@ h2 {text-align: center;}
 <div class="container">
 <div class="w3-padding">
 <header class="w3-container w3-center w3-padding-32">
-  <h1><b>The Physical and Digital Worlds are One</b></h1>
-  <h2>August 16, 2020</h2>
-  <img src="../pics/blog/physicaldigital/physicaldigital.jpg" alt="Two Worlds are One" style="width: 20%">
+  <h1><b>Running VMware on the Raspberry Pi 4</b></h1>
+  <h2>October 31, 2020</h2>
+  <img src="../pics/blog/pi/pi.jpg" alt="Raspberry Pi" style="width: 20%">
 </header>
 
-<p>Welcome to the roaring 20's! I want to highlight a mantra I have been saying this year, "The physical world and the digital world are one". </p>
+<p>Did you know you can run VMware from the Raspberry Pi now? This will be great for students to be able to run their own datacenter at home for a lot less than buying servers!</p>
 
-<h3>Physical World Common Sense</h3>
-<div class="row">
-  <div class="column">
-    <a href="https://www.youtube.com/watch?v=LY7HBxT3olw" target="_blank"><img src="../pics/blog/phydig/crossing.png" alt="Crossing street" style="width: 50%"></a>
-  </div>
-  <div class="column">
-    <a href="https://www.youtube.com/watch?v=IJNR2EpS0jw" target="_blank"><img src="../pics/blog/phydig/dwtd.jpg" alt="Dumb Ways to Die" style="width: 60%"></a>
-  </div>
-</div>
-<p>Looking that these two examples, would you say either of them is too far fetched? We teach our children basic safety such as these rules:</p>
-<img src="../pics/blog/phydig/playground.jpg" alt="playground safety rules">
-<p>These rules are simple to understand and ones we expect children to follow. In the same vein, we follow similar procedures to secure our home, such as:</p>
+<h3>Equipment Purchases</h3>
+<p>Running your own datacenter with RPi's is a great way to showcase your skills to an employer. This project shows you are actively utilizing your skills, making it easier to discuss technical experience. Lets begin by building our physical infrastructure. Here is a list of items I purchased to make this happen. Use this list as a reference/suggestion as you make your purchases.</p>
 <ul>
-  <li>Locking windows and doors when leaving home</li>
-  <li>Using different physical keys to open certain doors within the home (including gates)</li>
-  <li></li>
+  <li><a href="https://www.canakit.com/raspberry-pi-4-8gb.html?cid=usd&src=raspberrypi" target="_blank">Raspberry Pi 4B with 8 GB RAM, Basic Kit</a> ($89.95). I suggest using RPis with 8+ GB RAM to ensure you have enough room to run VMs.</li>
+  <li>An x64 bit Intel System with VT-x. vCenter will not work (yet) on arm processors. This can easily run Ubuntu/Windows with VMware Player (free).</li>
+  <li><a href="https://www.vmug.com/home" target="_blank">VMware User Group</a>. At $200/year, you are able to obtain vCenter and other VMware products without paying the huge price tag.</li>
 </ul>
-<h3>Digital World Education</h3>
-<p></p>
-<h3>The Two are One</h3>
-<p></p>
+<h3>Setup & Install</h3>
+<p>Stick around for the next part!</p>
 </div>
 </div>
 </div>
