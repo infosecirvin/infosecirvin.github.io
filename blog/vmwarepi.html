@@ -48,14 +48,24 @@ h2 {text-align: center;}
 
 <p>Did you know you can run VMware from the Raspberry Pi now? This will be great for students to be able to run their own datacenter at home for a lot less than buying servers!</p>
 
-<h3>Equipment Purchases</h3>
+<h2>Equipment Purchases</h2>
 <p>Running your own datacenter with RPi's is a great way to showcase your skills to an employer. This project shows you are actively utilizing your skills, making it easier to discuss technical experience. Lets begin by building our physical infrastructure. Here is a list of items I purchased to make this happen. Use this list as a reference/suggestion as you make your purchases.</p>
 <ul>
   <li><a href="https://www.canakit.com/raspberry-pi-4-8gb.html?cid=usd&src=raspberrypi" target="_blank">Raspberry Pi 4B with 8 GB RAM, Basic Kit</a> ($89.95). I suggest using RPis with 8+ GB RAM to ensure you have enough room to run VMs.</li>
-  <li>An x64 bit Intel System with VT-x. vCenter will not work (yet) on arm processors. This can easily run Ubuntu/Windows with VMware Player (free).</li>
+  <li>An x64 bit Intel System with VT-x. vCenter will not work (yet) on arm processors.</li>
   <li><a href="https://www.vmug.com/home" target="_blank">VMware User Group</a>. At $200/year, you are able to obtain vCenter and other VMware products without paying the huge price tag.</li>
 </ul>
-<h3>Setup & Install</h3>
+<h2>Setup & Install</h2>
+<h3>Intel System</h3>
+<p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion. If you are following this on a basic level, you can skip creating vCenter.</p>
+<p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
+<center><p><i>sudo apt update && sudo apt full-upgrade -y</i> (Install updates)<br>
+<i>apt install zfsutils-linux -y</i> (Install ZFS)<br>
+<i>sudo fdisk -l</i> (See the list of installed drives)<br>
+<i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
+<i>zpool list</i> (Verify the pool is up)<br></p></center>
+<h3>Pi Setup</h3>
+<p>Download the ISO file from this <a href="https://flings.vmware.com/esxi-arm-edition" target="_blank">VMware page</a>. </p>
 <p>Stick around for the next part!</p>
 </div>
 </div>
