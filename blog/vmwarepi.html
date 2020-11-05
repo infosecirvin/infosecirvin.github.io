@@ -55,14 +55,6 @@ h2 {text-align: center;}
   <li>2 micro SD cards (one for boot, one for ESXi). My suggestion is to buy a 1GB for boot, and anything larger than 16 GB for ESXi</li>
 </ul>
 <h2>Setup</h2>
-<h3>Intel System</h3>
-<p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion. If you are following this on a basic level, you can skip creating vCenter.</p>
-<p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
-<center><p><i>sudo apt update && sudo apt full-upgrade -y</i> (Install updates)<br>
-<i>apt install zfsutils-linux -y</i> (Install ZFS)<br>
-<i>sudo fdisk -l</i> (See the list of installed drives)<br>
-<i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
-<i>zpool list</i> (Verify the pool is up)<br></p></center>
 <h3>Pi Setup</h3>
 <p>Download the ISO file from this <a href="https://flings.vmware.com/esxi-arm-edition" target="_blank">VMware page</a>. There is a PDF (Fling on Raspberry Pi) that you will also need that has more links to download. At the bottom of page 5, you'll see the two you need to download.</p>
 <img src="../pics/blog/pi/downloadpdf.png" alt="3.2.1" style="width: 80%">
@@ -93,6 +85,15 @@ h2 {text-align: center;}
 <img src="../pics/blog/pi/addbootoption.jpg" alt="altering VMware" style="width: 60%">
 <p>From here, the installer process is straightforward. Once it completes, you will have ESXi installed and ready for work.</p>
 <img src="../pics/blog/pi/esxi.png" alt="ESXi" style="width: 60%">
+<h2>Adding vCenter</h2>
+<h3>Intel System</h3>
+<p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion. If you are following this on a basic level, you can skip creating vCenter.</p>
+<p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
+<center><p><i>sudo apt update && sudo apt full-upgrade -y</i> (Install updates)<br>
+<i>apt install zfsutils-linux -y</i> (Install ZFS)<br>
+<i>sudo fdisk -l</i> (See the list of installed drives)<br>
+<i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
+<i>zpool list</i> (Verify the pool is up)<br></p></center>
 </div>
 </div>
 </div>
