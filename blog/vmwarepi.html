@@ -52,10 +52,11 @@ h2 {text-align: center;}
 <p>Running your own datacenter with RPi's is a great way to showcase your skills to an employer. This project shows you are actively utilizing your skills, making it easier to discuss technical experience. Lets begin by building our physical infrastructure. Here is a list of items I purchased to make this happen. Use this list as a reference/suggestion as you make your purchases.</p>
 <ul>
   <li><a href="https://www.canakit.com/raspberry-pi-4-8gb.html?cid=usd&src=raspberrypi" target="_blank">Raspberry Pi 4B with 8 GB RAM, Basic Kit</a> ($89.95). I suggest using RPis with 8+ GB RAM to ensure you have enough room to run VMs.</li>
+  <li>2 micro SD cards (one for boot, one for ESXi). My suggestion is to buy a 1GB for boot, and anything larger than 16 GB for ESXi</li>
   <li>An x64 bit Intel System with VT-x. vCenter will not work (yet) on arm processors.</li>
   <li><a href="https://www.vmug.com/home" target="_blank">VMware User Group</a>. At $200/year, you are able to obtain vCenter and other VMware products without paying the huge price tag.</li>
 </ul>
-<h2>Setup & Install</h2>
+<h2>Setup</h2>
 <h3>Intel System</h3>
 <p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion. If you are following this on a basic level, you can skip creating vCenter.</p>
 <p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
@@ -65,8 +66,35 @@ h2 {text-align: center;}
 <i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
 <i>zpool list</i> (Verify the pool is up)<br></p></center>
 <h3>Pi Setup</h3>
-<p>Download the ISO file from this <a href="https://flings.vmware.com/esxi-arm-edition" target="_blank">VMware page</a>. </p>
-<p>Stick around for the next part!</p>
+<p>Download the ISO file from this <a href="https://flings.vmware.com/esxi-arm-edition" target="_blank">VMware page</a>. There is a PDF (Fling on Raspberry Pi) that you will also need that has more links to download. At the bottom of page 5, you'll see the two you need to download.</p>
+<img src="../pics/blog/pi/downloadpdf.png" alt="3.2.1" style="width: 80%">
+<p>I put everything into one folder for easy management through the process</p>
+<img src="../pics/blog/pi/folder.png" alt="Folder contents" style="width: 40%">
+<h4>SD Card Setup</h4>
+<p>I will mount the sd card to my laptop and use Disks (any disk formatter will do) to make one FAT partition.</p>
+<img src="../pics/blog/pi/formatted.png" alt="Reformatted drive" style="width: 40%">
+<p><i>This is the result after reformatting</i></p>
+<p>With the drive ready, we can unzip <b>firmware-master.zip</b> from our downloads earlier and copy all files in the boot folder <i>except</i> the "kernel.img" files.</p>
+<img src="../pics/blog/pi/copybootfiles.png" alt="Comparison" style="width: 80%">
+<p><i>You can see the files within the folder and the ones copied to the boot partition.</i></p>
+<p>Next, we will copy the entire contents of the <b>RPi4_UEFI_Firmware.zip</b> into the sd card. You will get some warnings about overwriting files; allow the system to overwrite them.</p>
+<img src="../pics/blog/pi/copywarining.png" alt="warning" style="width: 60%">
+<p>With that complete, we will make an edit to the <b>config.txt</b> file within the boot partition. At the bottom of the page, add "gpu_mem=16". This will limit the graphic's RAM allocation to 16 MB, which is more than enough.</p>
+<img src="../pics/blog/pi/gpu.png" alt="minimizing GPU RAM" style="width: 60%">
+<h4>USB Setup</h4>
+<p>Download <a href="https://www.balena.io/etcher/" target="_blank">Etcher</a> and use it to format the USB drive with the "VMware-VMvisor-Installer-7.0.0-17068872.aarch64.iso" file downloaded earlier. Etcher will warn you about a missing boot partition; this is ok.</p>
+<img src="../pics/blog/pi/etcher.png" alt="etcher" style="width: 60%">
+<p>You are ready to add the sd cards into your Raspberry Pi and attach the USB drive to install.</p>
+<h2>Install</h2>
+<p>Install the sd card with the boot files in the proper slot, connect your USB drive with the ISO to USB 3.0, connect your second sdcard and keyboard to USB 2, and use the leftmost HDMI port to connect to a monitor.</p>
+<img src="../pics/blog/pi/piready.jpg" alt="Pi connected" style="width: 60%">
+<p>When you attach power, th pi will begin booting. Hit <b>ESC</b> quicky to get into the BIOS.</p>
+<img src="../pics/blog/pi/bios.jpg" alt="Pi BIOS" style="width: 60%">
+<p>Within the BIOS, go to Device Manager > Raspberry Pi Settings > Advanced Configuration: Set "Limit RAM to 3 GB" to <b>Disabled</b>. Then save and "Reset" the PI to ensure the settings have taken effect.</p>
+<p>When the system reboots, VMware should start up. When you see the "Loading ESXi installer," type SHIFT+O. The bottom will now change to say "runweaselcdromBoot". Add the following: <b>autoPartitionOSDataSize=8192</b>. This will make a partition of 8 GB on your SD card for the OS and will allow you to use the extra space on your SD card as a datastore. If you are using the Pi only, this is favorable. If you will be using an external storage (local or network), you can skip this setp.</p>
+<img src="../pics/blog/pi/addbootoption.jpg" alt="altering VMware" style="width: 60%">
+<p>From here, the installer process is straightforward. Once it completes, you will have ESXi installed and ready for work.</p>
+<img src="../pics/blog/pi/esxi.png" alt="ESXi" style="width: 60%">
 </div>
 </div>
 </div>
