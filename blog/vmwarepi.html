@@ -53,6 +53,7 @@ h2 {text-align: center;}
 <ul>
   <li><a href="https://www.canakit.com/raspberry-pi-4-8gb.html?cid=usd&src=raspberrypi" target="_blank">Raspberry Pi 4B with 8 GB RAM, Basic Kit</a> ($89.95). I suggest using RPis with 8+ GB RAM to ensure you have enough room to run VMs.</li>
   <li>2 micro SD cards (one for boot, one for ESXi). My suggestion is to buy a 1GB for boot, and anything larger than 16 GB for ESXi</li>
+  <li>You will also need a keyboard, a USB drive (anything over 1 GB), a micro HDMI to HDMI cable, and an HDMI monitor</li>
 </ul>
 <h2>Setup</h2>
 <h3>Pi Setup</h3>
@@ -78,6 +79,7 @@ h2 {text-align: center;}
 <h2>Install</h2>
 <p>Install the sd card with the boot files in the proper slot, connect your USB drive with the ISO to USB 3.0, connect your second sdcard and keyboard to USB 2, and use the leftmost HDMI port to connect to a monitor.</p>
 <img src="../pics/blog/pi/piready.jpg" alt="Pi connected" style="width: 60%">
+<p><i>That heatsink can be <a href="https://www.amazon.com/Raspberry-Armor-Metal-Aluminium-Heatsink/dp/B07VWM4J4L/ref=sr_1_10?dchild=1&keywords=raspberry+pi+4+heatsink&sr=8-10" target="_blank">bought on Amazon</a> for $17.99.</i></p>
 <p>When you attach power, th pi will begin booting. Hit <b>ESC</b> quicky to get into the BIOS.</p>
 <img src="../pics/blog/pi/bios.jpg" alt="Pi BIOS" style="width: 60%">
 <p>Within the BIOS, go to Device Manager > Raspberry Pi Settings > Advanced Configuration: Set "Limit RAM to 3 GB" to <b>Disabled</b>. Then save and "Reset" the PI to ensure the settings have taken effect.</p>
@@ -86,14 +88,25 @@ h2 {text-align: center;}
 <p>From here, the installer process is straightforward. Once it completes, you will have ESXi installed and ready for work.</p>
 <img src="../pics/blog/pi/esxi.png" alt="ESXi" style="width: 60%">
 <h2>Adding vCenter</h2>
-<h3>Intel System</h3>
-<p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion. If you are following this on a basic level, you can skip creating vCenter.</p>
+<h3>x64 Based System</h3>
+<p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion.</p>
 <p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
 <center><p><i>sudo apt update && sudo apt full-upgrade -y</i> (Install updates)<br>
 <i>apt install zfsutils-linux -y</i> (Install ZFS)<br>
 <i>sudo fdisk -l</i> (See the list of installed drives)<br>
 <i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
 <i>zpool list</i> (Verify the pool is up)<br></p></center>
+<h3>vCenter Appliance</h3>
+<p>For this next part, I used my mac since it has VMware Fusion installed; you can use any VMWare product to do this (Player, Fusion or Workstation). You should not use Virtualbox for this OVA file for reasons that will make sense in a bit. When you download vCenter, you will get an ISO file, which at first can be confusing, since VMware has been talking about the appliance as the replacement for installing vCenter on a VM. But, within the ISO is what you need to create the appliance. Within the "vcsa" folder, copy out the OVA file to your desktop.</p>
+<img src="../pics/blog/pi/1.png" alt="vCenter within the ISO file" style="width: 60%">
+<p>Next, we will import the VM through File > Import. Select the file and accept the EULA. </p>
+<img src="../pics/blog/pi/2.png" alt="Import VM" style="width: 60%">
+<p>Select the type of vCenter installation; I won't have many systems running, so I will go with the Tiny (note the hardware requirements at the bottom). </p>
+<img src="../pics/blog/pi/3.png" alt="Select Size" style="width: 60%">
+<p>We can now preconfigure the system by going under each section and entering information. If you don't know what to type, click on the blue i on the right.</p>
+<img src="../pics/blog/pi/4.png" alt="Additional settings" style="width: 60%">
+<p>The process will take some time, but at the end you will have your vCenter instance ready to go.</p>
+<p></p>
 </div>
 </div>
 </div>
