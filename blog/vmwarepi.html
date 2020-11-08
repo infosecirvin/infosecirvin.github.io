@@ -89,6 +89,7 @@ h2 {text-align: center;}
 <img src="../pics/blog/pi/esxi.png" alt="ESXi" style="width: 60%">
 <h2>Adding vCenter</h2>
 <h3>x64 Based System</h3>
+<center><p><b>NOTE: this section is optional. Cabrillo College students can get vCenter for free <a href="https://e5.onthehub.com/WebStore/ProductsByMajorVersionList.aspx?ws=697cc8a5-1daa-df11-ad57-0030487d8897" target="_blank">from this site</a>.<br> Non-Cabrillo students can pay $200/yr for access to vCenter from <a href="https://community.vmug.com/vmug2019/membership/vmug-advantage-membership" target="_blank">VMware User Group</a>'s Advantage Membership.</b></p></center>
 <p>Since vCenter is not capable of running on arm yet, you will need any Intel/AMD based computer to run <a href="https://www.vmware.com/products/workstation-player/workstation-player-evaluation.html" target="_blank">VMware Player (free)</a> and vCenter within it. I had an old (2009) x64 system laying around that I resurrected <a href="https://twitter.com/InfoSecIrvin/status/1321877146369814528" target="_blank">with some work</a>. Any laptop or desktop with virtualization enabled would work just as fine; essentially, you will need a system that will stay on with the Pi cluster to manage it, just like you would with a large datacenter. I chose a desktop in order to add lots of storage space for vMotion.</p>
 <p>On my particular tower install, I added some SSDs I had, turning them into a ZFS pool for storage using the following commands:</p>
 <center><p><i>sudo apt update && sudo apt full-upgrade -y</i> (Install updates)<br>
@@ -96,6 +97,11 @@ h2 {text-align: center;}
 <i>sudo fdisk -l</i> (See the list of installed drives)<br>
 <i>sudo zpool create vmware raidz2 /dev/sda /dev/sdb /dev/sdc</i> (Create a RAID array with 2 parity with all these drives)<br>
 <i>zpool list</i> (Verify the pool is up)<br></p></center>
+<p>With this complete, I can turn this server into an NFS server for vCenter with the following commands:</p>
+<center><p><i>sudo apt update</i><br>
+<i>sudo apt install nfs-kernel-server -y</i><br>
+<i>sudo systemctl start nfs-kernel-server.service</i></p></center>
+<p>Edit the <b>/etc/exports</b> file to add the folder you wish to share. When you have made that change to the file, apply the change with <b>sudo exportfs -a</b>.</p>
 <h3>vCenter Appliance</h3>
 <p>For this next part, I used my mac since it has VMware Fusion installed; you can use any VMWare product to do this (Player, Fusion or Workstation). You should not use Virtualbox for this OVA file for reasons that will make sense in a bit. When you download vCenter, you will get an ISO file, which at first can be confusing, since VMware has been talking about the appliance as the replacement for installing vCenter on a VM. But, within the ISO is what you need to create the appliance. Within the "vcsa" folder, copy out the OVA file to your desktop.</p>
 <img src="../pics/blog/pi/1.png" alt="vCenter within the ISO file" style="width: 60%">
@@ -106,7 +112,6 @@ h2 {text-align: center;}
 <p>We can now preconfigure the system by going under each section and entering information. If you don't know what to type, click on the blue i on the right.</p>
 <img src="../pics/blog/pi/4.png" alt="Additional settings" style="width: 60%">
 <p>The process will take some time, but at the end you will have your vCenter instance ready to go. You can continue doing things like adding the ESXi hosts, creating VMs, vMotion, adding network storage and more!</p>
-<p></p>
 </div>
 </div>
 </div>
