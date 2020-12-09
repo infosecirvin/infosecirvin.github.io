@@ -66,11 +66,7 @@ h2 {text-align: center;}
 <p>In total, you are looking at about 9 TB worth of initial table downloading. I hope your ISP won't get upset at going way over their download limits. These RTI2 tables aren't useful in the latest RainbowTable software, so we will convert them to a more usable format.</p>
 <h2>Step 2: Converting Tables</h2>
 <h3>Conversion Round 1: RTI2 to RT</h3>
-<p>Once you have downloaded your tables, we will proceed to converting them. This is where your hardware's capabilities come into play. To begin, we will first convert the RTI2 files into RT files with the "rti2rto" tool, located at either <a href="https://infocon.org/rainbow%20tables/rainbow%20table%20software/" target="_blank">InfoCon</a> or <a href="https://freerainbowtables.com/rti2rto/" target="_blank">Free Rainbow Tables</a> websites.</p>
-<p>If using Windows, you should use the win64 7z file (you will need 7-Zip installed to extract the contents).</p>
-<p>If using Linux, you can downloade the src 7z (you will need to install make, cmake, and 7-zip as well). This is the source code, so you will need to use the command "make" to create an exectuable for your system.</p>
-<p><b>NOTE: this will create large files!</b></p>
-<p>Run the created/extracted file by pointing it to the location of the tables. As an example, I had my tables in /rt, so my command was:</p>
+<p>Once you have downloaded your tables, we will proceed to converting them. This is where your hardware's capabilities come into play. To begin, we will first convert the RTI2 files into RT files with the "rti2rto" tool, located at either <a href="https://infocon.org/rainbow%20tables/rainbow%20table%20software/" target="_blank">InfoCon</a> or <a href="https://freerainbowtables.com/rti2rto/" target="_blank">Free Rainbow Tables</a> websites.<br><br>If using Windows, you should use the win64 7z file (you will need 7-Zip installed to extract the contents).<br><br>If using Linux, you can downloade the src 7z (you will need to install make, cmake, and 7-zip as well). This is the source code, so you will need to use the command "make" to create an exectuable for your system.<br><br><b>NOTE: this will create large files!</b><br><br>Run the created/extracted file by pointing it to the location of the tables. As an example, I had my tables in /rt, so my command was:</p>
 <p><center><i>rti2rto /rt .</i></center></p>
 <p>This command tells rti2rto to look at all files and folders within /rt and convert them from rti2 to rt. Depending on your hardware, this can be quick, a couple of hours or days in the case of MD5 and NTLM (since both are terabytes big). Note that this is where the tables will grow 250%. When this completes, you can now remove all rti2 files from the folder. </p>
 <h3>Conversion Round 2: RT to RTC</h3>
@@ -89,10 +85,17 @@ h2 {text-align: center;}
 <p><center><i><b>rcrack /rt/lanman -h AABBCCDDEEFFAA</b></i> or <i><b>rcrack /rt/md5 -h 098f6bcd4621d373cade4e832627b4f6</b></i> will work;<br> rcrack's search is focused on a specific folder for hashes, which can have subfolders.</center></p>
 <h2>Step 4: Using the WebApp</h2>
 <p>What fun is it to spend all that time building this setup if you can't access it outside via browser when needed during a pentest engagement (at the time of this writing, I have spent a month building out LM and MD5 hashes alone)?</p>
-<h3>Cloud VM Setup</h3>
-<p>You can use a LAMP/LEMP server on the cloud to be the manner that you and your team can access via the web. With this server, you can install a Let's Encrypt certificate if you have a domain.</p>
-<h3>Local VM Setup</h3>
-<p></p>
+<h3>Infrastructure Setup</h3>
+<p>You can use a Linux server on the cloud to be the manner that you and your team can access via the web. With this server, you can install a Let's Encrypt certificate if you have a domain. During a pentest, this server will be able to hide its actions through HTTPS. For basic demonstrations, it will also work just fine over the browser.</p>
+<h4>Part 1: Cloud VM</h4>
+<p>On this box, you will need to install Python3, two add-ons and clone the repository where I have the code.<br><br><center><i>pip3 install flask flask-wtf waitress</i></center><br><i><center>git clone https://github.com/infosecirvin/rainbowtableproject.git</center></i><br><br>Since there is no way we will host so much data on the cloud, we will connect the cloud system to a local VM through a VPN tunnel that will pass information up from our home, where the tables will be located. First, upon settling on a static public address from a cloud provider, we will use <a href="https://bowneconsultingcontent.com/pub/EH/proj/H240.htm" target="_blank">these instructions</a> from Sam Bowne to build a simple VPN connection. In our case, the client will be the local VM we have at home that will house the tables and rcrack.</p>
+<h4>Part 2: Local VM</h4>
+<p>This local VM will do the actual searching of the tables and return the result to the cloud system. On this box, we will use the Sam Bowne instructions above to connect them in a VPN. Once this is complete, we will create a new restricted user that can ONLY run rcrack and nothing else; since this service will be pubilcly available and connected to our internal network, we don't want any leaks.</p>
+<h4>Part 3: Cloud VM</h4>
+<p>Back on the Cloud VM, we will install sshpass to pass the restricted user's credentials and execute our request.</p>
+<h3>Running Table Searches from the Cloud</h3>
+<p>We're almost done! First, we need to make some modifications to the program in order for it to work on your setup. Then we can run this and get cracking!</p>
+<p>This project was fun to create and execute. I should have all my tables ready by the end of the year and ready for 2021.</p>
 <h4>Resources</h4>
 <ul>
   <li><a href="https://infocon.org/rainbow%20tables/" target="_blank">InfoCon Tables</a></li>
