@@ -74,11 +74,32 @@ h2 {text-align: center;}
 <p><center><i>rti2rto /rt .</i></center></p>
 <p>This command tells rti2rto to look at all files and folders within /rt and convert them from rti2 to rt. Depending on your hardware, this can be quick, a couple of hours or days in the case of MD5 and NTLM (since both are terabytes big). Note that this is where the tables will grow 250%. When this completes, you can now remove all rti2 files from the folder. </p>
 <h3>Conversion Round 2: RT to RTC</h3>
-<p>With the large RT files now on your drive, we can begin the process to turn them into the smaller RTC format. First, download the latest version of <a href="https://project-rainbowcrack.com/" target="_blank">Rainbowcrack</a> for your OS.</p>
-<h2>Step 3: Using Project-RainbowCrack</h2>
-<p></p>
+<p>With the large RT files now on your drive, we can begin the process to turn them into the smaller RTC format. First, download the latest version of <a href="https://project-rainbowcrack.com/" target="_blank">Rainbowcrack</a> for your OS. Unzip the contents of the zip file. We will use some of the tools within.</p>
+<p>At this step, you can create a script to automate the tasks or do the steps manually; either way, they will need to be done for each folder individually. <b>rtmerge</b> and <b>rt2rtc</b> all come from the zip file earlier. Ensure you direct your OS to the proper location of the executable files. Here are the steps:</p>
+<ol>
+  <li>Merge the tables together (<b>rtmerge .</b>)</li>
+  <li>Remove the unnecessary files(<b>rm *dist*</b>)</li>
+  <li>Convert the merged file to RTC (<b>rt2rtc .</b>)</li>
+  <li>Remove unnecessary files (<b>rm *.rt</b>)</li>
+</ol>
+<p>This process will take more time depending on your hardware. When you are done, you will end up with RTC files that are slightly larger than the RTI2 files we started with, but they will be fully usable with rcrack.</p>
+<h2>Step 3: Using rcrack from Project Rainbowcrack</h2>
+<p><b>rcrack</b> is a program found within the Project-Rainbowcrack zip file downloaded earlier. You can use <a href="https://project-rainbowcrack.com/crack.htm" target="_blank">this documentation</a> to run the program as is. Simply run the program, direct it to the folder that has the hashes, and provide the hash with "-h". <b>Note:</b> Each type of hash (LM, NTLM, SHA1, MD5) must be executed separately. You can't run a MD5 hash and a LM hash from the same folder. For example:</p>
+<p><center><i><b>rcrack /rt -h AABBCCDDEEFFAA</b></i> and <i><b>rcrack /rt -h 098f6bcd4621d373cade4e832627b4f6</b></i> will not work;<br> rcrack is not able to search different hashes from the same folder.</center></p>
+<p><center><i><b>rcrack /rt/lanman -h AABBCCDDEEFFAA</b></i> or <i><b>rcrack /rt/md5 -h 098f6bcd4621d373cade4e832627b4f6</b></i> will work;<br> rcrack's search is focused on a specific folder for hashes, which can have subfolders.</center></p>
 <h2>Step 4: Using the WebApp</h2>
+<p>What fun is it to spend all that time building this setup if you can't access it outside via browser when needed during a pentest engagement (at the time of this writing, I have spent a month building out LM and MD5 hashes alone)?</p>
+<h3>Cloud VM Setup</h3>
+<p>You can use a LAMP/LEMP server on the cloud to be the manner that you and your team can access via the web. With this server, you can install a Let's Encrypt certificate if you have a domain.</p>
+<h3>Local VM Setup</h3>
 <p></p>
+<h4>Resources</h4>
+<ul>
+  <li><a href="https://infocon.org/rainbow%20tables/" target="_blank">InfoCon Tables</a></li>
+  <li><a href="https://freerainbowtables.com/" target="_blank">Free Rainbow Tables</a></li>
+  <li><a href="https://www.linuxtechi.com/execute-linux-commands-remote-system-over-ssh/" target="_blank">sshpass utility</a></li>
+  <li><a href="https://ostechnix.com/how-to-limit-users-access-to-the-linux-system/" target="_blank">Restricted Shell</a></li>
+</ul>
 </div>
 </div>
 </div>
