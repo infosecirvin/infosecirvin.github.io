@@ -66,9 +66,15 @@ h2 {text-align: center;}
 <p>In total, you are looking at about 9 TB worth of initial table downloading. I hope your ISP won't get upset at going way over their download limits. These RTI2 tables aren't useful in the latest RainbowTable software, so we will convert them to a more usable format.</p>
 <h2>Step 2: Converting Tables</h2>
 <h3>Conversion Round 1: RTI2 to RT</h3>
-<p></p>
+<p>Once you have downloaded your tables, we will proceed to converting them. This is where your hardware's capabilities come into play. To begin, we will first convert the RTI2 files into RT files with the "rti2rto" tool, located at either <a href="https://infocon.org/rainbow%20tables/rainbow%20table%20software/" target="_blank">InfoCon</a> or <a href="https://freerainbowtables.com/rti2rto/" target="_blank">Free Rainbow Tables</a> websites.</p>
+<p>If using Windows, you should use the win64 7z file (you will need 7-Zip installed to extract the contents).</p>
+<p>If using Linux, you can downloade the src 7z (you will need to install make, cmake, and 7-zip as well). This is the source code, so you will need to use the command "make" to create an exectuable for your system.</p>
+<p><b>NOTE: this will create large files!</b></p>
+<p>Run the created/extracted file by pointing it to the location of the tables. As an example, I had my tables in /rt, so my command was:</p>
+<p><center><i>rti2rto /rt .</i></center></p>
+<p>This command tells rti2rto to look at all files and folders within /rt and convert them from rti2 to rt. Depending on your hardware, this can be quick, a couple of hours or days in the case of MD5 and NTLM (since both are terabytes big). Note that this is where the tables will grow 250%. When this completes, you can now remove all rti2 files from the folder. </p>
 <h3>Conversion Round 2: RT to RTC</h3>
-<p></p>
+<p>With the large RT files now on your drive, we can begin the process to turn them into the smaller RTC format. First, download the latest version of <a href="https://project-rainbowcrack.com/" target="_blank">Rainbowcrack</a> for your OS.</p>
 <h2>Step 3: Using Project-RainbowCrack</h2>
 <p></p>
 <h2>Step 4: Using the WebApp</h2>
