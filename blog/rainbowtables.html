@@ -80,6 +80,8 @@ h2 {text-align: center;}
   <li>Remove unnecessary files (<b>rm *.rt</b>)</li>
 </ol>
 <p>This process will take more time depending on your hardware. When you are done, you will end up with RTC files that are slightly larger than the RTI2 files we started with, but they will be fully usable with rcrack.</p>
+<p>The entire conversion process took me one whole month with 4 VMs connected to a NAS (all 4 NICs bonded) over a Gigabit connection. The total size when competed is 11.3 TB, about 2 GB larger than all the RTI2 files initially downloaded.</p>
+<p><img src="../pics/blog/rainbowtables/total.png" alt="completed" style="width: 70%"></p>
 <h2>Step 3: Using rcrack from Project Rainbowcrack</h2>
 <p><b>rcrack</b> is a program found within the Project-Rainbowcrack zip file downloaded earlier. You can use <a href="https://project-rainbowcrack.com/crack.htm" target="_blank">this documentation</a> to run the program as is. Simply run the program, direct it to the folder that has the hashes, and provide the hash with "-h". <b>Note:</b> Each type of hash (LM, NTLM, SHA1, MD5) must be executed separately. You can't run a MD5 hash and a LM hash from the same folder. For example:</p>
 <p><center><i><b>rcrack /rt -h AABBCCDDEEFFAA</b></i> and <i><b>rcrack /rt -h 098f6bcd4621d373cade4e832627b4f6</b></i> will not work;<br> rcrack is not able to search different hashes from the same folder.</center></p>
