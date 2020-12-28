@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="w3-theme-black.css">
  <link rel="stylesheet" href="font-awesome.min.css">
 <!-- Website Header -->
-<title>RainbowTables Project 12/12/2020</title>
+<title>RainbowTables Project 12/28/2020</title>
 <meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
 <meta property="og:image" content="../pics/scicon.jpg"/>
 <meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
@@ -41,7 +41,7 @@ h2 {text-align: center;}
 <div class="w3-padding">
 <header class="w3-container w3-center w3-padding-32">
   <h1><b>RainbowTables Project</b></h1>
-  <h2>December 12, 2020</h2>
+  <h2>December 28, 2020</h2>
   <img src="../pics/blog/rainbowtables/rt.png" alt="RainbowTables" style="width: 70%">
   <p><i>Thanks to Brad Bettencourt for the picture</i></p>
 </header>
@@ -52,7 +52,7 @@ h2 {text-align: center;}
 <p>This project requires <i><b>A LOT</b></i> of storage. Before starting on this adventure, you must have the proper storage capabilities.
   <ul>
     <li>Ensure you have a redundant and reliable storage solution. Rainbowtables are dependent on the infrastructure underneath to quickly read and find the hashes.</li>
-    <li>Ensure you have plenty of storage. When working on this project, you should have <b>AT LEAST</b> 250% more free space than the initial size of the tables. This is necessary for the conversion process.</li>
+    <li>Ensure you have plenty of storage. When working on this project, you should have <b>AT LEAST</b> 250% more free space than the initial size of the tables. This is necessary for the conversion process. Once the dust settles, you should be able to fit the completed tabled in a 12 TB drive.</li>
   </ul></p>
 
 <h2>Step 1: Obtaining Tables</h2>
@@ -69,6 +69,7 @@ h2 {text-align: center;}
 <p>Once you have downloaded your tables, we will proceed to converting them. This is where your hardware's capabilities come into play. To begin, we will first convert the RTI2 files into RT files with the "rti2rto" tool, located at either <a href="https://infocon.org/rainbow%20tables/rainbow%20table%20software/" target="_blank">InfoCon</a> or <a href="https://freerainbowtables.com/rti2rto/" target="_blank">Free Rainbow Tables</a> websites.<br><br>If using Windows, you should use the win64 7z file (you will need 7-Zip installed to extract the contents).<br><br>If using Linux, you can downloade the src 7z (you will need to install make, cmake, and 7-zip as well). This is the source code, so you will need to use the command "make" to create an exectuable for your system.<br><br><b>NOTE: this will create large files!</b><br><br>Run the created/extracted file by pointing it to the location of the tables. As an example, I had my tables in /rt, so my command was:</p>
 <p><center><i>rti2rto /rt .</i></center></p>
 <p>This command tells rti2rto to look at all files and folders within /rt and convert them from rti2 to rt. Depending on your hardware, this can be quick, a couple of hours or days in the case of MD5 and NTLM (since both are terabytes big). Note that this is where the tables will grow 250%. When this completes, you can now remove all rti2 files from the folder. </p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">converting rainbowtables from rti2 &gt; rt &gt; rtc 😲<br>This is the all rti2&#39;s in a squash partition, all lm hashes in rtc, most of md5 in rtc and ntlm in rt. <a href="https://t.co/KJcpeVgsfH">pic.twitter.com/KJcpeVgsfH</a></p>&mdash; Irvin Lemus (@InfoSecIrvin) <a href="https://twitter.com/InfoSecIrvin/status/1339654755891564544?ref_src=twsrc%5Etfw">December 17, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <h3>Conversion Round 2: RT to RTC</h3>
 <p>With the large RT files now on your drive, we can begin the process to turn them into the smaller RTC format. First, download the latest version of <a href="https://project-rainbowcrack.com/" target="_blank">Rainbowcrack</a> for your OS. Unzip the contents of the zip file. We will use some of the tools within.</p>
 <p>At this step, you can create a script to automate the tasks or do the steps manually; either way, they will need to be done for each folder individually. <b>rtmerge</b> and <b>rt2rtc</b> all come from the zip file earlier. Ensure you direct your OS to the proper location of the executable files. Here are the steps:</p>
