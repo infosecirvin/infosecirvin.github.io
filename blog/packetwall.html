@@ -9,7 +9,7 @@
  <link rel="stylesheet" href="w3-theme-black.css">
  <link rel="stylesheet" href="font-awesome.min.css">
 <!-- Website Header -->
-<title>Packetwall Project 3/00/2021</title>
+<title>Packetwall Project 3/03/2021</title>
 <meta name="description" content="Irvin Lemus IT and Cybersecurity Consulting"/>
 <meta property="og:image" content="../pics/scicon.jpg"/>
 <meta name="keywords" content="Consulting, Cybersecurity, IT, Security"/>
@@ -25,6 +25,7 @@ h1 {text-align: center;}
 h2 {text-align: center;}
 .row {display: flex;}
 .column {flex: 33.33%;padding: 5px;}
+.center { margin: 0 auto; width: 400px; }
 </style>
 
 <div class="topnav" id="top">
@@ -41,8 +42,9 @@ h2 {text-align: center;}
 <div class="w3-padding">
 <header class="w3-container w3-center w3-padding-32">
   <h1><b>Packetwall Project</b></h1>
-  <h2>March 00, 2021</h2>
-  <img src="../pics/blog/rainbowtables/rt.png" alt="Packetwall" style="width: 70%">
+  <h2>March 03, 2021</h2>
+  <img src="../pics/blog/packetwall/itlives.png" alt="HTTP Packets Detected" style="width: 30%">
+  <p style="text-align: center;"><b><i>HTTP Packets Detected!</i></b></p>
 </header>
 <p>At a conference, <a href="https://twitter.com/@laurachappell" target="_blank">Laura Chappel</a> talked about a wall she had with lava lamps that light up when certain packets pass her network. I recalled it and said, why not make it and write about it?</p>
 
@@ -61,7 +63,9 @@ h2 {text-align: center;}
 <p style="text-align: center;"><b>Windows:</b> Open Command Prompt and change directory to the sd card's boot partition; then type <b>type nul > ssh</b><br>
 <b>MacOS and Linux:</b> Open the Terminal, change directory to the boot partition and type <b>touch ssh</b></p>
 <p>With your sdcard ready, insert it into your Pi and boot the device. When it is up, find it on the network and ssh into it. As always, your first steps should be to change password (<b>passwd</b>) and then update (<b>sudo apt update && sudo apt full-upgrade -y</b>).</p>
-<p>Our last step is to connect the SharkTapUSB device to the Pi, verify it is recognized before moving forward. A simple way to check is by running <b>lsusb</b>
+<p>Our last step is to connect the SharkTapUSB device to the Pi, verify it is recognized before moving forward. Connect the SharkTapUSB to USB3, with one end connected to the LAN side of the router and the other to the rest of the network.</p>
+<img src="../pics/blog/packetwall/sharktap.jpg" alt="sharktap" style="width: 50%">
+<p>A simple way to check is by running <b>lsusb</b>
 <img src="../pics/blog/packetwall/sharktap.png" alt="SharkTapUSB">
 <p>The SharkTapUSB is recognized without drivers; you should reboot the device after connecting it so that it appears as a wired ethernet device.</p>
 <img src="../pics/blog/packetwall/newnic.png" alt="New NIC">
@@ -87,14 +91,28 @@ h2 {text-align: center;}
 <img src="../pics/blog/packetwall/program.png" alt="The Program">
 <p>Above is a picture of the program. Essentially, it will run tshark in the background, saving packets in a ring buffer of 2 files every 10 seconds. In 10 second intervals, the program will filter through the trace files created by Tshark to find any packets that meet the display filters listed in the "<b>-Y</b>" argument. If none exist, it will write a "0" on a file; if any were found, those packets will be saved for your further analysis and a "1" will be written on a file. This will repeat until you stop the program.</p>
 <p>You can easily add more rules by copying the sample lines and changing the rule number variable (rule2 & r2), the display filter (add your filter in the single quotes after <b>-Y</b> in lines 20 and 25), and change the output file (<b>-w</b> on line 25).</p>
-<p><b>NOTE:</b> For troubleshooting purposes, if Tshark isn't cooperating, you can stop it by running:</p>
-<p style="text-align: center;"><i>sudo killall tshark</i></p>
+
 <h2>LED Configuration</h2>
-<p>Now to build the light system! We will use <a href="https://www.raspberrypi.org/documentation/usage/gpio/">this page</a> to understand what pins we can use on the Pi. For my single rule, I will use pin 2.</p>
+<p>Now to build the light system! We will use <a href="https://www.raspberrypi.org/documentation/usage/gpio/" target="_blank">this page</a> to understand what pins we can use on the Pi. For my single rule example, I will use pin 12.</p>
+<img src="../pics/blog/packetwall/lightsetup.jpg" alt="Light 1" style="width: 50%">
+<p style="text-align: center;"><i>Remember to put a 220 Ohm resistor at the negative end of the LED. You don't want to burn them out.</i></p>
+<img src="../pics/blog/packetwall/simplecircuit.png" alt="Simple LED Circuit">
+<p style="text-align:center;"><i>Here is a simple LED circuit for your reference</i></p>
+<img src="../pics/blog/packetwall/led.jpg" alt="LED">
+<p style="text-align: center;"><i>Here is a reference on the right way to insert the LED</i></p>
 
-<p>Using <a href="https://www.makeuseof.com/tag/raspberry-pi-control-led/" target="_blank">this page</a> as reference, we can make a program similar to light up LEDs based on our rules</p>
-<p>Using <a href="https://opensource.com/article/21/1/light-display-raspberry-pi" target="_blank">this page</a> as reference, we can build the schematics for the actual build.</p>
+<h2>Lights Program</h2>
+<p>I have chosen to use starter code from <a href="https://github.com/simonprickett/bash-traffic-lights-pi/blob/master/trafficlights.sh" target="_blank">this GitHub repository</a> to make the lights turn on.</p>
+<img src="../pics/blog/packetwall/lights.png" alt="Lights program">
+<p>The top of the program (lines 1-37) are all functions that we will use to turn off and on lights. Be sure to make changes and add more colors as you add more rules to the previous file, such as under lines 7, 36, 49, and 51.</p>
 
+<h2>Putting It All Together</h2>
+<p>After you make your own rules and select what colors you want to light up when, its all a matter of making the two programs executable and then running them to see your network sensor light up!</p>
+<p style="text-align:center;"><i>chmod +x program.sh</i><br><i>chmod +x light.sh</i></p>
+<p>Once they are ready, run them with: <b>./program.sh && ./lights.sh</b> and see it in action. Feel free to modify the code to your environment!</p>
+
+<h3>Watch the Progress Unfold</h3>
+<p>You can watch my progress in making this project on <a href="https://www.youtube.com/watch?v=Pe1JyAtQpIU&list=PL317oxSce8R8VG5BgIpv3mn5TFnMN-IS7" target="_blank">YouTube;</a> live work is done on <a href="https://twitch.tv/infosecirvin" target="_blank">Twitch</a>.</p>
 </div>
 </div>
 <!-- Footer -->
