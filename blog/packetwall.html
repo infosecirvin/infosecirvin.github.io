@@ -44,16 +44,6 @@ h2 {text-align: center;}
   <h2>March 00, 2021</h2>
   <img src="../pics/blog/rainbowtables/rt.png" alt="Packetwall" style="width: 70%">
 </header>
-
-<h1>Things missing in code</h1>
-<ul>
-  <li>not writing so many files and working in memory</li>
-  <li>saving a sample of bad packets for later Analysis</li>
-  <li>being able to choose what client to focus on</li>
-  <li>web ui</li>
-</ul>
-
-
 <p>At a conference, <a href="https://twitter.com/@laurachappell" target="_blank">Laura Chappel</a> talked about a wall she had with lava lamps that light up when certain packets pass her network. I recalled it and said, why not make it and write about it?</p>
 
 <h2>Equipment Purchases</h2>
@@ -64,30 +54,45 @@ h2 {text-align: center;}
   <li>Adafuit Quad Level Shifter (found on <a href="https://www.amazon.com/Adafruit-Accessories-Quad-Level-Shifter-piece/dp/B00XW2L39K/ref=sr_1_1?dchild=1&keywords=74AHCT125&qid=1614705765&sr=8-1" target="_blank">Amazon</a> for $4.80)</li>
 </ul>
 
-<h2>Setting up the Raspberry Pi</h2>
-<p>install raspbian os on sd card</p>
-<p>Set up SSH on the boot partition</p>
-<p>ssh into the pi and verify that the sharktap is recognized as a NIC</p>
+<h2>Preparing the Raspberry Pi</h2>
+<p>To begin, we need to first install the latest version of Raspberry Pi OS on the SD card of our pi. You can follow the instructions <a href="https://www.raspberrypi.org/software/" target="_blank">on this site</a>, which has an installer that will do the heavy lifting for you.</p>
+<img src="../pics/blog/packetwall/installraspbianos.png" alt="Raspberry Pi OS" style="width: 50%">
+<p><br>Before disconnecting the sd card, don't forget to add a blank file called "ssh" on the boot partition.</p>
+<p style="text-align: center;"><b>Windows:</b> Open Command Prompt and change directory to the sd card's boot partition; then type <b>type nul > ssh</b><br>
+<b>MacOS and Linux:</b> Open the Terminal, change directory to the boot partition and type <b>touch ssh</b></p>
+<p>With your sdcard ready, insert it into your Pi and boot the device. When it is up, find it on the network and ssh into it. As always, your first steps should be to change password (<b>passwd</b>) and then update (<b>sudo apt update && sudo apt full-upgrade -y</b>).</p>
+<p>Our last step is to connect the SharkTapUSB device to the Pi, verify it is recognized before moving forward. A simple way to check is by running <b>lsusb</b>
+<img src="../pics/blog/packetwall/sharktap.png" alt="SharkTapUSB">
+<p>The SharkTapUSB is recognized without drivers; you should reboot the device after connecting it so that it appears as a wired ethernet device.</p>
 <img src="../pics/blog/packetwall/newnic.png" alt="New NIC">
-<p>The new nic is seen as "eth1"</p>
+<p style="text-align: center;"><i>The SharkTapUSB is seen as a NIC called "eth1"</i></p>
 
-<h2>Capturing Traffic with Tshark</h2>
-<p>Installing tshark with apt</p>
-<p>Install termshark for any troubleshooting</p>
-<p>say yes to this prompt</p>
+<h2>Installing Software</h2>
+<p>With the Pi ready for work, we will now install what we need for this project. On the Pi, we will install the necessary programs and copy the repository for the program. Run the following commands on the Pi:</p>
+<p style="text-align: center;"><i>sudo apt install git tshark -y</i></p>
+<p>When installing Tshark, you will br prompted to allow non-superusers to capture packets; select yes to continue.</p>
 <img src="../pics/blog/packetwall/dumpcapwarning.png" alt="Dumpcap Warning">
+<p>Next, we will download Termshark for troubleshooting. Termshark can be downloaded from <a href="https://github.com/gcla/termshark/releases target="_blank""> this page.</a> Right click and copy the link for the "armv6" file:</p>
+<img src="../pics/blog/packetwall/termshark.png" alt="Termshark">
+<p>In the Pi's terminal, we will type</p>
+<p style="text-align: center;"><i>wget -O https://github.com/gcla/termshark/releases/download/v2.2.0/termshark_2.2.0_linux_armv6.tar.gz</i></p>
+<p>to download the file directly on the pi. <b>Please ensure you are using the latest link as the one I have here is an example.</b> You can unzip the file with the command:</p>
+<p style="text-align: center;"><i>tar -zxvf termshark_2.2.0_linux_armv6.tar.gz</i></p>
+<p>It will make a folder with all the files necessary to run termshark there. This will will be useful to check out the trace files without having to copy out the files somewhere else.</p>
+<p>Next we will download the repository that has the programs to make this work:</p>
+<p style="text-align: center;"><i>git clone https://github.com/infosecirvin/packetwall.git</i></p>
+<p><b>NOTE:</b>The location where you will unzip and execute the files is where the program will save the trace files. If you have a small sd card, you may want to connect the pi to a NAS or attach an external USB drive, copying the files from this repository there. <i>(For those interested, you can use <a href="https://www.osradar.com/how-to-instll-and-configure-nfs-client-on-ubuntu-18-04/" target="_blank">this site</a> to connect your pi to a NAS.)</i></p>
 
-<p>set up ring buffer</p>
-<p>Save to NAS to prevent too much I/O from burning the sd card</p>
-<p>install nfs-common if its not installed already</p>
-<p>using <a href="https://www.osradar.com/how-to-instll-and-configure-nfs-client-on-ubuntu-18-04/" target="_blank">this site</a> as reference, we will connect our pi to the NAS.</p>
-<p>note that what is eventually displayed by the LED lights is delayed since we are writing to a file and reading it in the next step.</p>
-
-<h2>Converting Captured Data</h2>
-<p>read capture, get statistics for each display filter</p>
-
+<h2>Understanding the Program</h2>
+<img src="../pics/blog/packetwall/program.png" alt="The Program">
+<p>Above is a picture of the program. Essentially, it will run tshark in the background, saving packets in a ring buffer of 2 files every 10 seconds. In 10 second intervals, the program will filter through the trace files created by Tshark to find any packets that meet the display filters listed in the "<b>-Y</b>" argument. If none exist, it will write a "0" on a file; if any were found, those packets will be saved for your further analysis and a "1" will be written on a file. This will repeat until you stop the program.</p>
+<p>You can easily add more rules by copying the sample lines and changing the rule number variable (rule2 & r2), the display filter (add your filter in the single quotes after <b>-Y</b> in lines 20 and 25), and change the output file (<b>-w</b> on line 25).</p>
+<p><b>NOTE:</b> For troubleshooting purposes, if Tshark isn't cooperating, you can stop it by running:</p>
+<p style="text-align: center;"><i>sudo killall tshark</i></p>
 <h2>LED Configuration</h2>
-<p>Using <a href="https://www.makeuseof.com/tag/raspberry-pi-control-led/">this page</a> as reference, we can make a program similar to light up LEDs based on our rules</p>
+<p>Now to build the light system! We will use <a href="https://www.raspberrypi.org/documentation/usage/gpio/">this page</a> to understand what pins we can use on the Pi. For my single rule, I will use pin 2.</p>
+
+<p>Using <a href="https://www.makeuseof.com/tag/raspberry-pi-control-led/" target="_blank">this page</a> as reference, we can make a program similar to light up LEDs based on our rules</p>
 <p>Using <a href="https://opensource.com/article/21/1/light-display-raspberry-pi" target="_blank">this page</a> as reference, we can build the schematics for the actual build.</p>
 
 </div>
