@@ -76,13 +76,14 @@ h2 {text-align: center;}
 <p style="text-align: center;"><i>sudo apt install git tshark -y</i></p>
 <p>When installing Tshark, you will br prompted to allow non-superusers to capture packets; select yes to continue.</p>
 <img src="../pics/blog/packetwall/dumpcapwarning.png" alt="Dumpcap Warning">
-<p>Next, we will download Termshark for troubleshooting. Termshark can be downloaded from <a href="https://github.com/gcla/termshark/releases target="_blank""> this page.</a> Right click and copy the link for the "armv6" file:</p>
+<p>Next, we will download Termshark for troubleshooting. Termshark can be downloaded from <a href="https://github.com/gcla/termshark/releases" target="_blank"> this page.</a> Right click and copy the link for the "armv6" file:</p>
 <img src="../pics/blog/packetwall/termshark.png" alt="Termshark">
 <p>In the Pi's terminal, we will type</p>
 <p style="text-align: center;"><i>wget -O https://github.com/gcla/termshark/releases/download/v2.2.0/termshark_2.2.0_linux_armv6.tar.gz</i></p>
 <p>to download the file directly on the pi. <b>Please ensure you are using the latest link as the one I have here is an example.</b> You can unzip the file with the command:</p>
 <p style="text-align: center;"><i>tar -zxvf termshark_2.2.0_linux_armv6.tar.gz</i></p>
-<p>It will make a folder with all the files necessary to run termshark there. This will will be useful to check out the trace files without having to copy out the files somewhere else.</p>
+<p>It will make a folder with all the files necessary to run termshark there. This will will be useful to check out the trace files without having to copy out the files somewhere else. Here is an example of Termshark in use during my livestream as I was figuring out why I kept getting HTTP messages. Turns out, my Chromecast was sending these packets!</p>
+<img src="../pics/blog/packetwall/termshark2.png" alt="Termshark in action">
 <p>Next we will download the repository that has the programs to make this work:</p>
 <p style="text-align: center;"><i>git clone https://github.com/infosecirvin/packetwall.git</i></p>
 <p><b>NOTE:</b>The location where you will unzip and execute the files is where the program will save the trace files. If you have a small sd card, you may want to connect the pi to a NAS or attach an external USB drive, copying the files from this repository there. <i>(For those interested, you can use <a href="https://www.osradar.com/how-to-instll-and-configure-nfs-client-on-ubuntu-18-04/" target="_blank">this site</a> to connect your pi to a NAS.)</i></p>
