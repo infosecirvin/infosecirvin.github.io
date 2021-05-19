@@ -43,27 +43,68 @@ h2 {text-align: center;}
   <h1><b>Packetwall: for Classrooms</b></h1>
   <h2>Hands-on Network Analysis</h2>
   <img src="../pics/blog/packetwall/itlives.png" alt="packetwall" style="width: 70%">
-  <p style="text-align: center">This workshop implements knowledge of Wireshark, Bash scripting, Electronics and Networking in one project. Participants will build a device that detects and notifies when certain packets are found. This project will help participants understand Network Analysis in a different form.<br><br>
+  <p style="text-align: center">This workshop implements knowledge of Wireshark, Bash scripting, Electronics and Networking in one project.<br>Participants will build a device that detects and notifies when certain packets are found. This project will help participants understand Network Analysis in a different form.<br><br>
 </header>
 
-<h2 style="text-align: center"><span style="font-weight: 700;">Required Parts (~$70):</span></h2>
+<h2 style="text-align: center"><span style="font-weight: 700;">Required Parts (~$70/student):</span></h2>
   <p style="text-align: center">
     <a href="https://www.canakit.com/raspberry-pi-4-2gb.html?cid=usd&src=raspberrypi" target="_blank">Raspberry Pi 4 2GB ($35)</a><br>
     <a href="https://www.amazon.com/REXQualis-Electronics-Breadboard-Resistor-Raspberry/dp/B078XV3RK2/ref=sr_1_8?crid=24IWHWUUMSSJI&dchild=1&keywords=rexqualis&qid=1620863614&sprefix=rexqua%2Caps%2C231&sr=8-8" target="_blank">REXQualis Electronics Basic Kit ($14.49)</a><br>
     <a href="https://www.amazon.com/TP-Link-Foldable-Gigabit-Ethernet-Compatible/dp/B00YUU3KC6/ref=sr_1_4?dchild=1&keywords=usb%2B3%2Bto%2Bethernet&qid=1620863866&sr=8-4&th=1" target="_blank">TP-Link USB3 to Ethernet Adapter ($12.99)</a><br>
-    <a href="https://www.amazon.com/Samsung-MicroSDHC-Adapter-MB-ME32GA-AM/dp/B06XWN9Q99/ref=sr_1_3?dchild=1&keywords=32gb+micro+sd&qid=1620864011&sr=8-3" target="_blank">32GB MicroSD card ($7.49)</a>
+    <a href="https://www.amazon.com/Samsung-MicroSDHC-Adapter-MB-ME32GA-AM/dp/B06XWN9Q99/ref=sr_1_3?dchild=1&keywords=32gb+micro+sd&qid=1620864011&sr=8-3" target="_blank">32GB MicroSD card ($7.49)</a><br>
+    A laptop or desktop with Wi-Fi<br>
+    Any device with an Ethernet jack
   </p>
 
-<h2 style="text-align: center"><span style="font-weight: 700;">Step 1: Install Raspbian</span></h2>
-<p>balena etch, enable ssh</p>
+<h2 style="text-align: center"><span style="font-weight: 700;">Step 1: Install the OS</span></h2>
+<h3 style="text-align: center"><span style="font-weight: 700;">Step 1a: Install Raspberry Pi OS</span></h3>
+<p style="text-align: center">Raspberry Pi OS is easily installed using the <a href="https://www.raspberrypi.org/software/" target="_blank">Raspberry Pi Imager</a>. This free software will help students prepare their microSD cards for use with the Pi.
+<img src="../pics/workshops/rpiosimager.png" alt="Raspberry Pi OS Imager"><br><br>
+Once the small program is installed, you can insert the microSD into the system, ensure the OS can see the card and then open the program. Click on "<b>Choose OS</b>" and then select "<b>Raspberry Pi OS (other)</b>.
+<img src="../pics/workshops/chooseos.png" alt="Choosing the OS"><br><br>
+Select the "<b>Raspberry Pi OS Lite (32 bit)</b>" option.
+<img src="../pics/workshops/rpios.png" alt="RPI lite"><br><br>
+Choose the proper storage location (mine was easy to locate)
+<img src="../pics/workshops/storageoption.png" alt="storage option"><br><br>
+Click on "<b>Write</b>" to start the formatting process. This will take a couple of minutes to complete.
+<img src="../pics/workshops/formatting complete.png" alt="Formatting complete">
+<i>Formatting complete</i><br><br></p>
 
-<h2 style="text-align: center"><span style="font-weight: 700;">Step 2: Configure Raspbian</span></h2>
-<p>update, download termshark, tshark,
+<h3 style="text-align: center"><span style="font-weight: 700;">Step 1b: Enable SSH</span></h3>
+<p style="text-align: center">Before we put the microSD card in the Pi, we need to enable SSH to interact with it, since we will not be using a mouse or keyboard. Here are the steps to enable SSH on various OS's:
 
-<h2 style="text-align: center"><span style="font-weight: 700;">Step 3: configure packetwall</span></h2>
-  <p>bridge usb and reconnect from wifi, start capture for 2 GB</p>
+<h4 style="text-align: center"><span style="font-weight: 700;"><i>All Unix based OS</i></span></h4>
+<p style="text-align: center">1. Mount the <b>boot</b> partition and in the Terminal, change directory to that partition.<br>
+2. Type: <b>touch ssh</b> in order to create a blank file called <i>ssh</i> in the boot directory.<br>
+3. It is ok to unmount the drive and connect it to your Pi.</p>
 
-<h2 style="text-align: center"><span style="font-weight: 700;">Step 3: configure packetwall</span></h2>
+<h4 style="text-align: center"><span style="font-weight: 700;"><i>Windows</i></span></h4>
+<p style="text-align: center">1. Mount the <b>boot</b> partition and in the Command Prompt, change directory to that partition.<br>
+2. Type: <b>type nul >> "ssh"</b> in order to create a blank file called <i>ssh</i> in the boot directory.<br>
+3. It is ok to unmount the drive and connect it to your Pi.</p>
+
+<h2 style="text-align: center"><span style="font-weight: 700;">Step 2: Configuring the Pi</span></h2>
+<h3 style="text-align: center"><span style="font-weight: 700;">Step 2a: Connect and Update</span></h3>
+<p style="text-align: center">Boot the Pi normally, waiting for it to get an IP address from its primary NIC. Connect to the Pi at its IP address using Terminal or Command prompt as follows:<br><br>
+<b>ssh pi@xxx.xxx.xxx.xxx</b> <i>(the default password is raspberry)</i><br><br>
+Once logged in, we will proceed to update the OS by typing <b>sudo apt update && sudo apt full-upgrade -y</b>. This will take some time depending on Internet speed and the amount of updates to install.<br>
+With the updates complete, we will proceed to install the the necessary software, tshark and termshark.<br><br></p>
+
+<h3 style="text-align: center"><span style="font-weight: 700;">Step 2b: Installing Software</span></h3>
+<p style="text-align: center">Tshark can be installed by typing <b>sudo apt install tshark -y</b>
+<img src="../pics/workshops/permission.png" alt="permission question">
+<i>At this prompt, select "No"</i><br><br>
+Termshark can be downloaded from GitHub. Go to <a href="https://github.com/gcla/termshark" target="_blank">Termshark's GitHub page</a> and click on "Releases."
+<img src="../pics/workshops/termshark1.png" alt="Termshark GitHub page">
+<br><br>Scroll down to the "Assets" section and right click select "Copy Link Address" on the <i>armv6</i> option.
+<img src="../pics/workshops/termshark2.png" alt="Termshark Assets page"><br><br>
+Type <b>wget</b> and then paste the link from the GitHub page onto the terminal. We can also unzip the file immediately after if we use the following command:<br><br>
+<b>wget https://github.com/gcla/termshark/releases/download/v2.2.0/termshark_2.2.0_linux_armv6.tar.gz && tar -xvzf termshark_2.2.0_linux_armv6.tar.gz</b></p>
+
+<h2 style="text-align: center"><span style="font-weight: 700;">Step 3: Configure Packetwall Software</span></h2>
+<p>bridge usb and reconnect from wifi, start capture for 2 GB</p>
+
+<h2 style="text-align: center"><span style="font-weight: 700;">Step 4: Connect LEDs</span></h2>
 <p>look over capture, fine tune packetwall bash settings, repeat until desired filters are used.</p>
 
 
